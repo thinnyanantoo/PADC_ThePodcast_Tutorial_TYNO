@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">PADC_ThePodcast_Tutorial_TYNO</string>
+    <string name="description_txt">Having a personalized description name will make you stand out of the stand out let your audience and client recognize your brand.So, whereever you decide on.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="txt_tiltle">Woman Tech PodCast show for women</string>
+    <string name="txt_title_desc">Woman Tech PodCast #show# is good for learning to take good advantages.</string>
+    <string name="txt_time_left">1h left</string>
+    <string name="txt_detail">The Disruptive Entrepreneur podcast, hosted by entrepreneur, investor and British businessman, Rob Moore, offers a mix of disruptive content and a totally unique concept: unscripted and unedited interviews with both world famous and left-field successful entrepreneurs, exclusive “Caffeine Casts” episodes and blunt “Rob’s Rants”.
+
+The host, world record holder and multi-millionaire Rob Moore, claims that anyone can be a successful entrepreneur if you learn from those already winning. Rob believes that success in all walks of life leaves clues, and it’s his mission on this podcast to reveal these traits, insights and experiences to help you unleash your entrepreneurial spirit and success. Subscribe now!</string>
+    <string name="txt_try_again">It look like you\'re not enrolled in \n any podcasts,but it\'s easy to get   \n \t\t\t\t\t\t\t\t\t\t\t\t\t         started</string>
+    <string name="txt_find_sth_new">Find Something new</string>
+    <string name="txt_reload">Reload</string>
+</resources>

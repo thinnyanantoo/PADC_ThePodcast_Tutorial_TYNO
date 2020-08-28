@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <stroke
+        android:width="10dp"/>
+
+    <corners
+        android:bottomLeftRadius="@dimen/margin_card_medium"
+        android:bottomRightRadius="@dimen/margin_card_medium"
+        android:radius="@dimen/margin_card_medium"
+        android:topLeftRadius="@dimen/margin_card_medium"
+        android:topRightRadius="@dimen/margin_card_medium"/>
+
+</shape>

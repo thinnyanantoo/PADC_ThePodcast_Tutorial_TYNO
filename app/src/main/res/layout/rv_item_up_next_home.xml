@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/margin_medium_3"
+    android:layout_marginBottom="@dimen/margin_medium_3"
+    android:background="@android:color/white"
+    app:cardCornerRadius="@dimen/margin_medium_2"
+    android:elevation="3dp"
+        >
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="@dimen/margin_medium_2"
+        app:cardElevation="10dp"
+        android:outlineProvider="bounds"
+        android:background="@android:color/white">
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:weightSum="4"
+         android:orientation="horizontal">
+         <androidx.cardview.widget.CardView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             app:cardCornerRadius="15dp"
+             android:elevation="5dp"
+             android:layout_weight="1">
+             <ImageView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:src="@drawable/icon"
+                 android:scaleType="centerCrop"
+                 android:background="@color/placeHolderBG" />
+         </androidx.cardview.widget.CardView>
+         <LinearLayout
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_weight="2"
+             android:orientation="vertical"
+             android:layout_marginStart="@dimen/margin_medium"
+             android:layout_marginEnd="@dimen/margin_medium">
+             <TextView
+                 android:id="@+id/tvStatus"
+                 android:layout_width="wrap_content"
+                 android:text="ART &amp; DESIGN"
+                 android:paddingStart="5dp"
+                 android:paddingEnd="5dp"
+                 android:textColor="@color/textColorTertary"
+                 android:textStyle="bold"
+                 android:fontFamily="@font/cambay"
+                 android:paddingTop="@dimen/margin_small"
+                 android:paddingBottom="@dimen/margin_medium"
+                 android:background="@drawable/button_background"
+                 android:layout_marginTop="@dimen/margin_card_medium"
+                 android:layout_marginStart="@dimen/margin_medium"
+                 android:layout_height="22dp"
+                 android:textSize="8sp"
+                 />
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="@string/txt_tiltle"
+                 android:maxLines="2"
+                 android:textColorHint="@color/textColorPrimary"
+                 android:layout_marginStart="@dimen/margin_medium"
+                 android:layout_marginTop="@dimen/margin_card_medium"/>
+             <RelativeLayout
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginStart="@dimen/margin_medium">
+
+                 <com.example.padc_thepodcast_tutorial_tyno.views.components.StraightProgressBar
+                     android:id="@+id/straightProgressUpNext"
+                     android:layout_width="120dp"
+                     android:layout_height="4dp"
+                     android:layout_marginTop="@dimen/margin_medium_2"
+                     app:strProgress="30"
+                     app:color="@color/progressColor"
+                     app:stroke_width="120dp"
+                     app:stroke_height="4dp"
+                     />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_marginStart="@dimen/margin_medium_1"
+                     android:layout_marginTop="@dimen/margin_card_medium"
+                     android:layout_toRightOf="@+id/straightProgressUpNext"
+                     android:text="@string/txt_time_left"
+                     android:textColor="#9CBECD" />
+             </RelativeLayout>
+
+
+         </LinearLayout>
+         <ImageView
+             android:layout_width="60dp"
+             android:layout_height="80dp"
+             android:layout_gravity="center"
+             android:clickable="true"
+             android:onClick="@color/colorPrimary"
+android:src="@drawable/download"
+             android:layout_weight="1"/>
+
+     </LinearLayout>
+</androidx.cardview.widget.CardView>
+</androidx.cardview.widget.CardView>

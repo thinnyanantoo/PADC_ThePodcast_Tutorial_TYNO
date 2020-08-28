@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.padc_thepodcast_tutorial_tyno.views.viewpods.PlaybackHomeViewPod xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:id="@+id/cardViewPlayBack"
+    android:orientation="vertical"
+    android:outlineProvider="bounds"
+    app:cardBackgroundColor="@color/mediaBGColor"
+    app:cardElevation="60dp"
+    app:cardCornerRadius="30dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp">
+
+         <androidx.cardview.widget.CardView
+     android:layout_width="85dp"
+     android:layout_height="85dp"
+     app:cardCornerRadius="20dp"
+     android:layout_margin="5dp"
+     android:elevation="15dp">
+     <ImageView
+         android:id="@+id/roundedImageView"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:src="@drawable/image3"
+         android:background="@android:color/white"
+         android:scaleType="centerCrop"/>
+ </androidx.cardview.widget.CardView>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:maxLines="1"
+                    android:text="@string/txt_tiltle"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:text="The women intech Show is how to use"
+                    android:textColor="@color/textColorTertary"
+                    android:textSize="12sp"/>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp">
+
+                    <com.example.padc_thepodcast_tutorial_tyno.views.components.StraightProgressBar
+                        android:id="@+id/straightProgress"
+                        android:layout_width="120dp"
+                        android:layout_height="4dp"
+                        android:layout_marginTop="@dimen/margin_medium_2"
+                        app:strProgress="30"
+                        app:color="@color/progressColor"
+                        app:stroke_width="120dp"
+                        app:stroke_height="4dp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_toRightOf="@id/straightProgress"
+                        android:text="1h left"
+                        android:textColor="#9CBECD" />
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="horizontal"
+            android:weightSum="5">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:layout_weight="1"
+                android:text="1x"
+                android:textColor="@android:color/white"
+                android:textSize="22sp" />
+
+            <ImageView
+                android:id="@+id/ivReplay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dm_distance"
+                android:layout_marginTop="22dp"
+                android:layout_toRightOf="@id/textView"
+                android:layout_weight="1"
+                android:src="@drawable/ic_baseline_replay_10_24" />
+
+            <FrameLayout
+                android:id="@+id/frameLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dm_distance"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/ivReplay"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:src="@drawable/ic_baseline_lens_24" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_baseline_pause_24" />
+            </FrameLayout>
+
+            <ImageView
+                android:id="@+id/ivForward"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dm_distance"
+                android:layout_marginTop="22dp"
+                android:layout_toRightOf="@id/frameLayout"
+                android:layout_weight="1"
+                android:src="@drawable/ic_baseline_forward_30_24" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dm_distance"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="@dimen/margin_medium_3"
+                android:layout_toRightOf="@id/ivForward"
+                android:layout_weight="1"
+                android:text="Zz"
+                android:textColor="@android:color/white"
+                android:textSize="22sp" />
+        </LinearLayout>
+    </LinearLayout>
+</com.example.padc_thepodcast_tutorial_tyno.views.viewpods.PlaybackHomeViewPod>

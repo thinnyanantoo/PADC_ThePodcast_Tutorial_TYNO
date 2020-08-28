@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".fragments.DownloadFragment"
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="10dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="@dimen/margin_medium">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ivBack"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_baseline_arrow_back_ios_24"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your"
+            android:textColor="@color/textColorPrimary"
+            android:id="@+id/textViewOne"
+            android:layout_toRightOf="@id/ivBack"
+            style="@style/text_styleOne"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" Shows"
+            android:textColor="@color/textColorSecondary"
+            android:layout_toRightOf="@id/textViewOne"
+            style="@style/text_styleOne"/>
+
+    </RelativeLayout>
+<include
+    android:id="@+id/vpYourShows"
+    layout="@layout/your_show_recycler_view_pod"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@+id/relativeLayout"
+    android:layout_marginEnd="10dp" />
+
+</RelativeLayout>

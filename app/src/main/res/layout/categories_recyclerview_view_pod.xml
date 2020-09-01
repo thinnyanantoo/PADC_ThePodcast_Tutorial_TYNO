@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.example.padc_thepodcast_tutorial_tyno.views.viewpods.CategorySearchViewPod xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCategorySearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:clipToPadding="false"
         android:orientation="horizontal"
-        tools:listitem="@layout/rv_search_category_item"/>
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/rv_search_category_item" />
 
 </com.example.padc_thepodcast_tutorial_tyno.views.viewpods.CategorySearchViewPod>

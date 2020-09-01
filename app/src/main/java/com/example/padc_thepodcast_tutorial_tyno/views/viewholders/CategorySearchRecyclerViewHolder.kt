@@ -1,18 +1,18 @@
 package com.example.padc_thepodcast_tutorial_tyno.views.viewholders
 
 import android.view.View
-import androidx.recyclerview.widget.RecyclerView
-import com.example.padc_thepodcast_tutorial_tyno.Delegates.ItemDelegate
-import com.example.padc_thepodcast_tutorial_tyno.mvp.views.MainView
+import com.example.padc_thepodcast_tutorial_tyno.delegates.ItemDelegate
+import com.example.padc_thepodcast_tutorial_tyno.mvp.views.HomeView
 
-class CategorySearchRecyclerViewHolder(itemView : View,delegate : ItemDelegate): BaseViewHolder<MainView>(itemView) {
+class CategorySearchRecyclerViewHolder(itemView: View) : BaseViewHolder<HomeView>(itemView) {
 
     init {
         itemView.setOnClickListener {
-            delegate.onTapItem()
+            // delegate.onTapItem()
         }
     }
-    override fun bindData(data: MainView) {
+
+    override fun bindData(data: HomeView) {
 
     }
 }

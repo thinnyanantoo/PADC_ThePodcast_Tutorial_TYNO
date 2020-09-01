@@ -26,7 +26,6 @@
         android:layout_marginBottom="@dimen/margin_medium_3"
         app:cardCornerRadius="30dp"
         android:elevation="25dp"
-
         >
         <ImageView
             android:id="@+id/categoryPlaceHolder"
@@ -40,9 +39,9 @@
             android:layout_height="wrap_content"
             android:text="How to Influence with \n Tactical Empathy"
            android:textColor="@android:color/white"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:fontFamily="@font/cambay"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="140dp"
             android:layout_marginStart="20dp"/>
     </androidx.cardview.widget.CardView>
 

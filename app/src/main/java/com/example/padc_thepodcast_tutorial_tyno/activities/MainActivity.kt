@@ -5,10 +5,11 @@ import android.os.Bundle
 import android.view.MenuItem
 import com.example.padc_thepodcast_tutorial_tyno.R
 import com.example.padc_thepodcast_tutorial_tyno.fragments.*
+import com.example.padc_thepodcast_tutorial_tyno.mvp.views.MainView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() , MainView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -55,6 +56,19 @@ class MainActivity : AppCompatActivity() {
 
             })
         }
+
+    override fun displayFragment() {
     }
+
+    override fun enableSwipeRefresh() {
+
+    }
+
+    override fun disableSwipeRefresh() {
+        TODO("Not yet implemented")
+    }
+
+
+}
 
 

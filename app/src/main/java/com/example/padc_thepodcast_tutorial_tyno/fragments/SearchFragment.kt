@@ -5,11 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.padc_thepodcast_tutorial_tyno.Delegates.ItemDelegate
+import com.example.padc_thepodcast_tutorial_tyno.delegates.ItemDelegate
 import com.example.padc_thepodcast_tutorial_tyno.R
 import com.example.padc_thepodcast_tutorial_tyno.adapters.CategorySearchRecyclerAdapter
-import com.example.padc_thepodcast_tutorial_tyno.mvp.views.MainView
+import com.example.padc_thepodcast_tutorial_tyno.mvp.presenters.Impls.SearchPresenterImpl
+import com.example.padc_thepodcast_tutorial_tyno.mvp.presenters.SearchPresenter
+import com.example.padc_thepodcast_tutorial_tyno.mvp.views.HomeView
+import com.example.padc_thepodcast_tutorial_tyno.mvp.views.SearchView
 import kotlinx.android.synthetic.main.categories_recyclerview_view_pod.*
 import kotlinx.android.synthetic.main.fragment_search.*
 
@@ -23,17 +27,14 @@ private const val ARG_PARAM2 = "param2"
  * Use the [SearchFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class SearchFragment : Fragment() ,ItemDelegate,MainView{
+class SearchFragment : Fragment() ,SearchView{
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
-    override fun onTapItem() {
 
-    }
-
-
-    private val mcategorySearchAdapter : CategorySearchRecyclerAdapter = CategorySearchRecyclerAdapter(this)
+    private lateinit var mcategorySearchAdapter : CategorySearchRecyclerAdapter
+    private lateinit var mPresenter : SearchPresenter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -51,11 +52,22 @@ class SearchFragment : Fragment() ,ItemDelegate,MainView{
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        setUpPresenter()
+        setUpRecycler()
+        disableSwipeRefresh()
+    }
+
+    private fun setUpPresenter(){
+        mPresenter = ViewModelProviders.of(activity!!).get(SearchPresenterImpl::class.java)
+
+    }
+
+    private fun setUpRecycler(){
+        mcategorySearchAdapter = CategorySearchRecyclerAdapter()
         val linearLayoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
         rvCategorySearch.layoutManager = linearLayoutManager
         rvCategorySearch.adapter = mcategorySearchAdapter
-
-        disableSwipeRefresh()
     }
 
     companion object {
@@ -78,9 +90,7 @@ class SearchFragment : Fragment() ,ItemDelegate,MainView{
             }
     }
 
-    override fun navigateToDetailActivity(podcastId: Int) {
 
-    }
 
     override fun displayEmptyView() {
 

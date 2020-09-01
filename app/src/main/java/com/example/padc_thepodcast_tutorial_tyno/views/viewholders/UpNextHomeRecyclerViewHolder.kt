@@ -1,14 +1,21 @@
 package com.example.padc_thepodcast_tutorial_tyno.views.viewholders
 
 import android.view.View
-import androidx.recyclerview.widget.RecyclerView
-import com.example.padc_thepodcast_tutorial_tyno.Delegates.ItemDelegate
-import com.example.padc_thepodcast_tutorial_tyno.R
-import com.example.padc_thepodcast_tutorial_tyno.mvp.views.MainView
-import kotlinx.android.synthetic.main.rv_item_up_next_home.*
+import com.bumptech.glide.Glide
+import com.example.padc_thepodcast_tutorial_tyno.data.vos.EpisodePlaylistVO
+import com.example.padc_thepodcast_tutorial_tyno.delegates.ItemDelegate
+import kotlinx.android.synthetic.main.play_back_view_pod.view.*
+import kotlinx.android.synthetic.main.rv_item_up_next_home.view.*
 
-class UpNextHomeRecyclerViewHolder(itemView: View,delegate : ItemDelegate) : BaseViewHolder<MainView>(itemView) {
-    override fun bindData(data: MainView) {
+class UpNextHomeRecyclerViewHolder(itemView: View, delegate: ItemDelegate) :
+    BaseViewHolder<EpisodePlaylistVO>(itemView) {
+    override fun bindData(data: EpisodePlaylistVO) {
+        mData = data
+        Glide.with(itemView.context)
+            .load(data.data.image)
+            .into(itemView.upNextImage)
+
+        itemView.upNextTitle.text = data.data.title
     }
 
     init {

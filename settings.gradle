@@ -1,2 +1,3 @@
+include ':shared'
 include ':app'
 rootProject.name = "PADC_ThePodcast_Tutorial_TYNO"

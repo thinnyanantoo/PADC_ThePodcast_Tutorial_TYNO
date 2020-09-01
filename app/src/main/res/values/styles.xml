@@ -1,6 +1,6 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -28,6 +28,15 @@
         <item name="cornerSizeBottomRight">32dp</item>
         <item name="cornerSizeBottomLeft">32dp</item>
         <item name="cornerSizeTopLeft">32dp</item>
+    </style>
+
+    <style name="AppTheme.PopupOVerlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <style name="ShapeAppearanceOverlay.MyApp.Button.Circle" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">100%</item>
     </style>
 
 

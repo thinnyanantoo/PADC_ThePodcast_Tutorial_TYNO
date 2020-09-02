@@ -10,11 +10,14 @@ class MainPresenterImpl : MainPresenter, AbstractBasePresenter<MainView>(){
     }
 
     override fun displayEmptyView() {
+
     }
 
     override fun enableSwipeRefresh() {
+
     }
 
     override fun disableSwipeRefresh() {
+
     }
 }

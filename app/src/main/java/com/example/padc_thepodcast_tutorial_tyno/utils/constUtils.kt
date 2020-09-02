@@ -9,9 +9,10 @@ const val GET_RANDOM_PODCAST = "just_listen"
 
 const val EM_NO_INTERNET_CONNECTION = "NO Internet Connection"
 
-const val GET_UPNEXT_EPISOID = "playlists/"
 const val PLAYLIST_ID  = "SgTozE1ZAe3"
 const val TYPE = "episode_list"
 const val LAST_TIME_STAMP = "0"
 const val SORT = "recent_added_first"
+
+const val GET_EPISODE = "episodes"
 

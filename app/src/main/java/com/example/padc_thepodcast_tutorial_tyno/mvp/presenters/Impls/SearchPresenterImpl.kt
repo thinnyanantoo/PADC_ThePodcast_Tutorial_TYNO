@@ -5,10 +5,6 @@ import com.example.padc_thepodcast_tutorial_tyno.mvp.presenters.SearchPresenter
 import com.example.padc_thepodcast_tutorial_tyno.mvp.views.SearchView
 
 class SearchPresenterImpl : SearchPresenter, AbstractBasePresenter<SearchView>() {
-    override fun disableSwipeRefresh() {
-
-    }
-
     override fun displayEmptyView() {
 
     }
@@ -16,4 +12,9 @@ class SearchPresenterImpl : SearchPresenter, AbstractBasePresenter<SearchView>()
     override fun enableSwipeRefresh() {
 
     }
+
+    override fun disableSwipeRefresh() {
+
+    }
+
 }

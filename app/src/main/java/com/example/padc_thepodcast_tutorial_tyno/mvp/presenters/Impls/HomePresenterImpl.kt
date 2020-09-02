@@ -24,8 +24,8 @@ class HomePresenterImpl : HomePresenter, AbstractBasePresenter<HomeView>() {
 
     }
 
-    override fun onTapItem() {
-        mView?.navigateToDetailActivity()
+    override fun onTapItem(podCastId : String) {
+        mView?.navigateToDetailActivity(podCastId)
     }
 
     override fun onTapPlay() {
@@ -36,18 +36,6 @@ class HomePresenterImpl : HomePresenter, AbstractBasePresenter<HomeView>() {
         mView?.actionOnPauseTap()
     }
 
-    override fun displayEmptyView() {
-        TODO("Not yet implemented")
-    }
-
-    override fun enableSwipeRefresh() {
-        TODO("Not yet implemented")
-    }
-
-    override fun disableSwipeRefresh() {
-        TODO("Not yet implemented")
-    }
-
     private fun requestAllRandomPodCast(lifecycleOwner: LifecycleOwner) {
         mView?.enableSwipeRefresh()
         mPodCastModel.getAllRandomPodCast(onError = {
@@ -55,11 +43,14 @@ class HomePresenterImpl : HomePresenter, AbstractBasePresenter<HomeView>() {
             mView?.displayEmptyView()
         }).observe(lifecycleOwner, Observer {
             mView?.disableSwipeRefresh()
-//            if(it.isEmpty())
-//                mView?.displayEmptyView()
-//            else
-            mView?.displayRandomPodCastList(it)
-
+            if(it!=null){
+                mView?.displayRandomPodCastList(it)
+            }
+            else
+            {
+                mView?.disableSwipeRefresh()
+                mView?.displayEmptyView()
+            }
         })
     }
 
@@ -76,6 +67,18 @@ class HomePresenterImpl : HomePresenter, AbstractBasePresenter<HomeView>() {
             else
                 mView?.displayUpNextPlayList(it)
         })
+    }
+
+    override fun displayEmptyView() {
+
+    }
+
+    override fun enableSwipeRefresh() {
+
+    }
+
+    override fun disableSwipeRefresh() {
+
     }
 
 }

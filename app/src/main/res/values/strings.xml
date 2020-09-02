@@ -12,4 +12,5 @@ The host, world record holder and multi-millionaire Rob Moore, claims that anyon
     <string name="txt_try_again">It look like you\'re not enrolled in \n any podcasts,but it\'s easy to get   \n \t\t\t\t\t\t\t\t\t\t\t\t\t         started</string>
     <string name="txt_find_sth_new">Find Something new</string>
     <string name="txt_reload">Reload</string>
+    <string name="minute">m</string>
 </resources>

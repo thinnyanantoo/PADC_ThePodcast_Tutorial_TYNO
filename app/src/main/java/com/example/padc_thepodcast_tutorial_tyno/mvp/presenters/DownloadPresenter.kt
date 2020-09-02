@@ -4,7 +4,7 @@ import androidx.lifecycle.LifecycleOwner
 import com.example.padc_thepodcast_tutorial_tyno.delegates.ItemDelegate
 import com.example.padc_thepodcast_tutorial_tyno.mvp.views.DownloadView
 
-interface DownloadPresenter : BasePresenter <DownloadView>, ItemDelegate{
+interface DownloadPresenter : BasePresenter <DownloadView>{
     fun onUiReady(lifecycleOwner: LifecycleOwner)
 
     fun onSwipeRefresh(lifecycleOwner: LifecycleOwner)

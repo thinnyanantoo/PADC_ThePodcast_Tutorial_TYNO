@@ -1,11 +1,7 @@
 package com.example.padc_thepodcast_tutorial_tyno.data.vos
 
-import androidx.room.Embedded
-import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
-
-
 data class UpNextPlayListVO(
     @PrimaryKey
     @SerializedName("id") var id: String,

@@ -4,7 +4,7 @@ import com.example.padc_thepodcast_tutorial_tyno.data.vos.EpisodePlaylistVO
 import com.example.padc_thepodcast_tutorial_tyno.data.vos.RandomPodCastVO
 
 interface HomeView : BaseView{
-    fun navigateToDetailActivity()
+    fun navigateToDetailActivity(podCastId : String)
     fun actionOnPlayTap()
     fun actionOnPauseTap()
     fun displayRandomPodCastList(podCastList : RandomPodCastVO)

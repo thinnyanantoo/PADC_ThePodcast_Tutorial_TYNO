@@ -64,6 +64,8 @@ class HomeFragment : Fragment(), HomeView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setUpPresenter()
         //setUpPlayBack()
+        mPlayBackViewPod = vpPlayBack as PlaybackHomeViewPod
+        mupNextViewPod = vpUpNext as UpNextHomeViewPod
         setUpRecycler()
 
         //  straightProgress.progressSet = 70
@@ -125,9 +127,9 @@ class HomeFragment : Fragment(), HomeView {
             }
     }
 
-    override fun navigateToDetailActivity() {
+    override fun navigateToDetailActivity(id : String) {
         context?.let {
-            startActivity(DetailActivity.newIntent(it))
+            startActivity(DetailActivity.newIntent(it,id))
         }
     }
 
@@ -146,12 +148,12 @@ class HomeFragment : Fragment(), HomeView {
     }
 
     override fun displayRandomPodCastList(podCastList: RandomPodCastVO) {
-        mPlayBackViewPod = vpPlayBack as PlaybackHomeViewPod
+
         mPlayBackViewPod.setBindData(podCastList, requireContext())
     }
 
     override fun displayUpNextPlayList(upNextList: List<EpisodePlaylistVO>) {
-        mupNextViewPod = vpUpNext as UpNextHomeViewPod
+      //  mupNextViewPod = vpUpNext as UpNextHomeViewPod
         mupNextViewPod.bindAdapter(mupNextAdapter, upNextList.toMutableList())
     }
 

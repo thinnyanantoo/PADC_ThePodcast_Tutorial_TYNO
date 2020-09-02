@@ -20,7 +20,9 @@ class UpNextHomeRecyclerViewHolder(itemView: View, delegate: ItemDelegate) :
 
     init {
         itemView.setOnClickListener {
-            delegate.onTapItem()
+            mData?.let{
+            delegate.onTapItem(it.id.toString())
+        }
         }
     }
 }

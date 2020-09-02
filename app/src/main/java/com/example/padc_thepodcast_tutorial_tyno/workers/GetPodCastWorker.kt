@@ -7,6 +7,7 @@ class GetPodCastWorker(context: Context, workerParams: WorkerParameters) :
     BaseWorkers(context, workerParams) {
     override fun doWork(): Result {
         var result = Result.failure()
+        var id : String = ""
 
         mPodCastModel.getAllRandomPodCastFromApiAndSaveToDatabase(
             onSuccess = {
@@ -18,6 +19,16 @@ class GetPodCastWorker(context: Context, workerParams: WorkerParameters) :
         )
 
         mPodCastModel.getAllUpNextListFromApiAndSaveToDatabase(
+            onSuccess = {
+                result = Result.success()
+            },
+            onError = {
+                result = Result.failure()
+            }
+        )
+
+        mPodCastModel.getEpisodeDetailByIdFromApiAndSaveToDatabase(
+            id,
             onSuccess = {
                 result = Result.success()
             },

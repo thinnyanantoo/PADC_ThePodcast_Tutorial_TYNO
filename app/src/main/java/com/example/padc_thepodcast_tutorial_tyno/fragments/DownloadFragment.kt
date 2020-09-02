@@ -68,7 +68,7 @@ class DownloadFragment : Fragment() , DownloadView{
     }
 
     private fun setUpRecycler(){
-        myourShowAdapter = YourShowsRecyclerAdapter(mPresenter)
+        myourShowAdapter = YourShowsRecyclerAdapter()
         val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         rvYourShow.layoutManager = linearLayoutManager
         rvYourShow.adapter = myourShowAdapter
@@ -109,12 +109,6 @@ class DownloadFragment : Fragment() , DownloadView{
                     putString(ARG_PARAM2, param2)
                 }
             }
-    }
-
-    override fun navigateToDetailActivity() {
-        context?.let {
-            startActivity(DetailActivity.newIntent(it))
-        }
     }
 
     override fun displayEmptyView() {

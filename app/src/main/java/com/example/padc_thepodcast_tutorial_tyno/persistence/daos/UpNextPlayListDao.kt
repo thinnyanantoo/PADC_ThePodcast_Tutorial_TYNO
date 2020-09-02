@@ -10,7 +10,7 @@ interface UpNextPlayListDao {
     fun getAllUpNextPlayList(): LiveData<List<EpisodePlaylistVO>>
 
     @Query("SELECT * FROM podcastUpNextEpisode WHERE id = :upnextId")
-    fun getUpNextById(upnextId: Int): LiveData<EpisodePlaylistVO>
+    fun getUpNextById(upnextId: String): LiveData<EpisodePlaylistVO>
 
     @Query("DELETE FROM podcastUpNextEpisode")
     fun deleteAll()

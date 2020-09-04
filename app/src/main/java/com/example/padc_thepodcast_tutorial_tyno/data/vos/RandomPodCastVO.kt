@@ -23,8 +23,8 @@ data class RandomPodCastVO(
     @SerializedName("maybe_audio_invalid") var maybeAudioInvalid: Boolean,
     @SerializedName("listennotes_edit_url") var listennoteEditUrl: String,
     @SerializedName("explicit_content") var explicitContent: Boolean,
-    @SerializedName("link") var link: String
-)
+    @SerializedName("link") var link: String,
+    @SerializedName("podcast")var podCast : PodCastVO)
 
 
 

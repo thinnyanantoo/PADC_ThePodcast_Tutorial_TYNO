@@ -3,6 +3,7 @@ package com.example.padc_thepodcast_tutorial_tyno.data.models
 import androidx.lifecycle.LiveData
 import com.example.padc_thepodcast_tutorial_tyno.data.vos.EpisodeDetailVO
 import com.example.padc_thepodcast_tutorial_tyno.data.vos.EpisodePlaylistVO
+import com.example.padc_thepodcast_tutorial_tyno.data.vos.GenereVO
 import com.example.padc_thepodcast_tutorial_tyno.data.vos.RandomPodCastVO
 import io.reactivex.CompletableOnSubscribe
 import io.reactivex.Observable
@@ -25,4 +26,8 @@ interface PodCastModel {
     fun getEpisdeDetail(id: String,onError: (String) -> Unit) : LiveData<EpisodeDetailVO>
 
     fun getEpisodeDetailByIdFromApiAndSaveToDatabase(id: String, onSuccess: () -> Unit,onError: (String) -> Unit)
+
+    fun getGenere(onError: (String) -> Unit) : LiveData<List<GenereVO>>
+
+    fun getGenereFromApiAndSaveToDatabase(onSuccess: () -> Unit,onError: (String) -> Unit)
 }

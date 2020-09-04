@@ -3,8 +3,8 @@ package com.example.padc_thepodcast_tutorial_tyno.network
 import com.example.padc_thepodcast_tutorial_tyno.data.vos.EpisodeDetailVO
 import com.example.padc_thepodcast_tutorial_tyno.data.vos.RandomPodCastVO
 import com.example.padc_thepodcast_tutorial_tyno.network.responses.EpisodePlayListResponse
+import com.example.padc_thepodcast_tutorial_tyno.network.responses.GetgenereResponse
 import com.example.padc_thepodcast_tutorial_tyno.utils.API_KEY
-import com.example.padc_thepodcast_tutorial_tyno.utils.GET_EPISODE
 import com.example.padc_thepodcast_tutorial_tyno.utils.GET_RANDOM_PODCAST
 import io.reactivex.Observable
 import retrofit2.http.*
@@ -28,4 +28,10 @@ interface PodCastApi {
         @Path("id")id : String,
         @Header(API_KEY)apiKey : String
     ) : Observable<List<EpisodeDetailVO>>
+
+    @GET("generes")
+    fun getGenere(
+        @Query("top_level_only")toplevelOnly : String,
+        @Header(API_KEY)apiKey : String
+    ) : Observable<GetgenereResponse>
 }

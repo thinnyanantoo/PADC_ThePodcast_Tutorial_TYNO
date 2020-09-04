@@ -6,13 +6,15 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.padc_thepodcast_tutorial_tyno.data.vos.EpisodeDetailVO
 import com.example.padc_thepodcast_tutorial_tyno.data.vos.EpisodePlaylistVO
+import com.example.padc_thepodcast_tutorial_tyno.data.vos.GenereVO
 import com.example.padc_thepodcast_tutorial_tyno.data.vos.RandomPodCastVO
 import com.example.padc_thepodcast_tutorial_tyno.persistence.daos.EpisodeDetailDao
+import com.example.padc_thepodcast_tutorial_tyno.persistence.daos.GenereDao
 import com.example.padc_thepodcast_tutorial_tyno.persistence.daos.RandomPodCastDao
 import com.example.padc_thepodcast_tutorial_tyno.persistence.daos.UpNextPlayListDao
 
 @Database(
-    entities = [RandomPodCastVO::class, EpisodePlaylistVO::class, EpisodeDetailVO::class],
+    entities = [RandomPodCastVO::class, EpisodePlaylistVO::class, EpisodeDetailVO::class, GenereVO::class],
     version = 1,
     exportSchema = false
 )
@@ -40,4 +42,5 @@ abstract class PodCastDB : RoomDatabase() {
     abstract fun RandomPodCastDao(): RandomPodCastDao
     abstract fun UpNextPlayListDao(): UpNextPlayListDao
     abstract fun EpisodeDetailDao(): EpisodeDetailDao
+    abstract fun GenereDao(): GenereDao
 }

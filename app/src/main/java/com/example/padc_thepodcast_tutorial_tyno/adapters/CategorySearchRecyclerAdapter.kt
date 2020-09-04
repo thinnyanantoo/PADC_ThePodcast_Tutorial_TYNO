@@ -5,9 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.padc_thepodcast_tutorial_tyno.delegates.ItemDelegate
 import com.example.padc_thepodcast_tutorial_tyno.R
+import com.example.padc_thepodcast_tutorial_tyno.data.vos.GenereVO
 import com.example.padc_thepodcast_tutorial_tyno.views.viewholders.CategorySearchRecyclerViewHolder
 
-class CategorySearchRecyclerAdapter() : RecyclerView.Adapter<CategorySearchRecyclerViewHolder>() {
+class CategorySearchRecyclerAdapter() : BaseRecyclerAdapter<CategorySearchRecyclerViewHolder, GenereVO>() {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -18,11 +19,4 @@ class CategorySearchRecyclerAdapter() : RecyclerView.Adapter<CategorySearchRecyc
         return CategorySearchRecyclerViewHolder(view)
     }
 
-    override fun getItemCount(): Int {
-        return 10
-    }
-
-    override fun onBindViewHolder(holder: CategorySearchRecyclerViewHolder, position: Int) {
-
-    }
 }

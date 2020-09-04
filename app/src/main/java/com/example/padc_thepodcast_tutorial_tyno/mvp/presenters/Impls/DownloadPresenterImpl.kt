@@ -12,16 +12,4 @@ class DownloadPresenterImpl : DownloadPresenter, AbstractBasePresenter<DownloadV
 
     }
 
-    override fun displayEmptyView() {
-
-    }
-
-    override fun enableSwipeRefresh() {
-
-    }
-
-    override fun disableSwipeRefresh() {
-
-    }
-
 }

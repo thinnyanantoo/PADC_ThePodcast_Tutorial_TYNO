@@ -12,7 +12,9 @@ const val EM_NO_INTERNET_CONNECTION = "NO Internet Connection"
 const val PLAYLIST_ID  = "SgTozE1ZAe3"
 const val TYPE = "episode_list"
 const val LAST_TIME_STAMP = "0"
+const val TOP_LEVEL_ONLY = "0"
 const val SORT = "recent_added_first"
 
-const val GET_EPISODE = "episodes"
-
+//Empty Image
+const val EMPTY_IMAGE_URL = "https://point-broadband.com/wp-content/uploads/2017/06/No-data-caps-graphic-e1497904686711.png"
+const val EM_NO_PODCAST_AVAILABLE = "There are no podCast available"

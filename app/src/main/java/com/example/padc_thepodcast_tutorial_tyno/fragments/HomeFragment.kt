@@ -1,6 +1,5 @@
 package com.example.padc_thepodcast_tutorial_tyno.fragments
 
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,16 +9,18 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.padc_thepodcast_tutorial_tyno.R
 import com.example.padc_thepodcast_tutorial_tyno.activities.DetailActivity
 import com.example.padc_thepodcast_tutorial_tyno.adapters.UpNextHomeRecyclerAdapter
-import com.example.padc_thepodcast_tutorial_tyno.data.models.Impls.PodCastModelImpl
-import com.example.padc_thepodcast_tutorial_tyno.data.models.PodCastModel
 import com.example.padc_thepodcast_tutorial_tyno.data.vos.EpisodePlaylistVO
 import com.example.padc_thepodcast_tutorial_tyno.data.vos.RandomPodCastVO
 import com.example.padc_thepodcast_tutorial_tyno.mvp.presenter.HomePresenter
 import com.example.padc_thepodcast_tutorial_tyno.mvp.presenters.Impls.HomePresenterImpl
 import com.example.padc_thepodcast_tutorial_tyno.mvp.views.HomeView
+import com.example.padc_thepodcast_tutorial_tyno.utils.EMPTY_IMAGE_URL
+import com.example.padc_thepodcast_tutorial_tyno.utils.EM_NO_PODCAST_AVAILABLE
+import com.example.padc_thepodcast_tutorial_tyno.views.viewpods.EmptyViewPod
 import com.example.padc_thepodcast_tutorial_tyno.views.viewpods.PlaybackHomeViewPod
 import com.example.padc_thepodcast_tutorial_tyno.views.viewpods.UpNextHomeViewPod
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.play_back_view_pod.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -42,8 +43,7 @@ class HomeFragment : Fragment(), HomeView {
     private lateinit var mupNextViewPod: UpNextHomeViewPod
     private lateinit var mPlayBackViewPod: PlaybackHomeViewPod
     private lateinit var mupNextAdapter: UpNextHomeRecyclerAdapter
-
-    private var mModel: PodCastModel = PodCastModelImpl
+    private lateinit var mViewPodEmpty : EmptyViewPod
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,22 +63,24 @@ class HomeFragment : Fragment(), HomeView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setUpPresenter()
-        //setUpPlayBack()
+        hideEmptyView()
         mPlayBackViewPod = vpPlayBack as PlaybackHomeViewPod
         mupNextViewPod = vpUpNext as UpNextHomeViewPod
         setUpRecycler()
-
-        //  straightProgress.progressSet = 70
-        //  straightProgressUpNext.progressSet = 60
-
         disableSwipeRefresh()
-
+        setUpEmptyViewPod()
         mPresenter.onUiReady(this)
     }
 
     private fun setUpRecycler() {
         mupNextAdapter = UpNextHomeRecyclerAdapter(mPresenter)
 
+    }
+
+    private fun setUpEmptyViewPod(){
+        mViewPodEmpty = vpEmpty as EmptyViewPod
+        mViewPodEmpty.setEmptyData(EM_NO_PODCAST_AVAILABLE, EMPTY_IMAGE_URL)
+        mViewPodEmpty.setDelegate(mPresenter)
     }
 
     private fun setUpPresenter() {
@@ -92,20 +94,20 @@ class HomeFragment : Fragment(), HomeView {
 //
 //    }
 
-    override fun onDestroy() {
-        mPlayBackViewPod.onDestroy()
-        super.onDestroy()
-    }
+//    override fun onDestroy() {
+//        mPlayBackViewPod.onDestroy()
+//        super.onDestroy()
+//    }
 
-    override fun onStart() {
+//    override fun onStart() {
+//
+//        super.onStart()
+//    }
 
-        super.onStart()
-    }
-
-    override fun onStop() {
-        mPlayBackViewPod.releasePlayer()
-        super.onStop()
-    }
+//    override fun onStop() {
+//        mPlayBackViewPod.releasePlayer()
+//        super.onStop()
+//    }
 
     companion object {
         /**
@@ -127,24 +129,24 @@ class HomeFragment : Fragment(), HomeView {
             }
     }
 
-    override fun navigateToDetailActivity(id : String) {
+    override fun navigateToDetailActivity(id: String) {
         context?.let {
-            startActivity(DetailActivity.newIntent(it,id))
+            startActivity(DetailActivity.newIntent(it, id))
         }
     }
 
     override fun actionOnPlayTap() {
-//        context.let {
-//            btnPlay.visibility = View.GONE
-//            btnPause.visibility = View.VISIBLE
-//        }
+        context.let {
+            btnPlay.visibility = View.GONE
+            btnPause.visibility = View.VISIBLE
+        }
     }
 
     override fun actionOnPauseTap() {
-//        context.let {
-//            btnPause.visibility = View.GONE
-//            btnPlay.visibility = View.VISIBLE
-//        }
+        context.let {
+            btnPause.visibility = View.GONE
+            btnPlay.visibility = View.VISIBLE
+        }
     }
 
     override fun displayRandomPodCastList(podCastList: RandomPodCastVO) {
@@ -153,11 +155,18 @@ class HomeFragment : Fragment(), HomeView {
     }
 
     override fun displayUpNextPlayList(upNextList: List<EpisodePlaylistVO>) {
-      //  mupNextViewPod = vpUpNext as UpNextHomeViewPod
+        //  mupNextViewPod = vpUpNext as UpNextHomeViewPod
         mupNextViewPod.bindAdapter(mupNextAdapter, upNextList.toMutableList())
     }
 
     override fun displayEmptyView() {
+        vpEmpty.visibility = View.VISIBLE
+
+    }
+
+    override fun hideEmptyView() {
+        vpEmpty.visibility = View.GONE
+
     }
 
     override fun enableSwipeRefresh() {

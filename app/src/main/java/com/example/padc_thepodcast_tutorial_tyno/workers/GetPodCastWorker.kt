@@ -37,6 +37,15 @@ class GetPodCastWorker(context: Context, workerParams: WorkerParameters) :
             }
         )
 
+        mPodCastModel.getGenereFromApiAndSaveToDatabase(
+            onSuccess = {
+                result = Result.success()
+            },
+            onError = {
+                result = Result.failure()
+            }
+        )
+
         return result
     }
 }

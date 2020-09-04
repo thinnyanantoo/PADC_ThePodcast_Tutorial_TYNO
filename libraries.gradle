@@ -34,6 +34,9 @@ ext{
             room : "androidx.room:room-runtime:$roomVersion",
             roomkapt : "androidx.room:room-compiler:$roomVersion",
 
+            //mmTextView
+            mmtext : "org.mmtextview:mmtextview:1.5",
+
             //lifecycle
             lifecycle : "android.arch.lifecycle:extensions:$lifecycleVersion",
             lifecyclekapt : "android.arch.lifecycle:compiler:$lifecycleVersion",

@@ -9,4 +9,8 @@ interface HomeView : BaseView{
     fun actionOnPauseTap()
     fun displayRandomPodCastList(podCastList : RandomPodCastVO)
     fun displayUpNextPlayList(upNextList : List<EpisodePlaylistVO>)
+    fun displayEmptyView()
+    fun hideEmptyView()
+    fun enableSwipeRefresh()
+    fun disableSwipeRefresh()
 }

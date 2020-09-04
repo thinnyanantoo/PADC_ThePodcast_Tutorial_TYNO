@@ -13,4 +13,5 @@ The host, world record holder and multi-millionaire Rob Moore, claims that anyon
     <string name="txt_find_sth_new">Find Something new</string>
     <string name="txt_reload">Reload</string>
     <string name="minute">m</string>
+    <string name="no_podcasts">PodCasts are not availabel for now</string>
 </resources>

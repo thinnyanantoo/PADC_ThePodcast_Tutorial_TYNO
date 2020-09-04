@@ -39,12 +39,6 @@ class PlaybackHomeViewPod @JvmOverloads constructor(
     private lateinit var dataSourceFactory: DefaultDataSourceFactory
     private var playbackPosition: Long = 0
     private lateinit var loadControl : LoadControl
-    private lateinit var  bandwidthMeter: BandwidthMeter
-    private lateinit var trackSelector : TrackSelector
-
-    private lateinit var defaultHttpDataSource: DefaultHttpDataSource
-    private lateinit var factory:ExtractorsFactory
-
 
     private var mpodCastData: RandomPodCastVO? = null
 
@@ -70,8 +64,6 @@ class PlaybackHomeViewPod @JvmOverloads constructor(
         onCreatePlayBack()
 
     }
-
-
 
 //    fun initExoPlayer() {
 //        simpleExoPlayer = SimpleExoPlayer.Builder(context).build()
@@ -125,17 +117,17 @@ class PlaybackHomeViewPod @JvmOverloads constructor(
         with(simpleExoPlayer) {
             prepare(mediaSource, false, false)
             btnPlay.setOnClickListener {
-                // mDelegate?.onTapPlay()
-                playWhenReady = true
-                btnPlay.visibility = View.GONE
-                btnPause.visibility = View.VISIBLE
+                 mDelegate?.onTapPlay()
+//                playWhenReady = true
+//                btnPlay.visibility = View.GONE
+//                btnPause.visibility = View.VISIBLE
             }
 
             btnPause.setOnClickListener {
-                //    mDelegate?.onTapPause()
-                playWhenReady = false
-                btnPause.visibility = View.GONE
-                btnPlay.visibility = View.VISIBLE
+                mDelegate?.onTapPause()
+//                playWhenReady = false
+//                btnPause.visibility = View.GONE
+//                btnPlay.visibility = View.VISIBLE
             }
         }
 
@@ -195,82 +187,16 @@ class PlaybackHomeViewPod @JvmOverloads constructor(
         })
     }
 
-//    fun initializePlayer() {
-//        simpleExoPlayer = SimpleExoPlayer.Builder(context).build()
-//        dataSourceFactory =
-//            DefaultDataSourceFactory(context, Util.getUserAgent(context, "exoPlayerSample"))
-//        val randomUrl = urlList.random()
-//        preparePlayer(randomUrl.first, randomUrl.second)
-//        exoPlayer.player = simpleExoPlayer
-//        simpleExoPlayer.seekTo(playbackPosition)
-//        simpleExoPlayer.playWhenReady = true
-//        simpleExoPlayer.addListener(object : Player.EventListener {
-//            override fun onPlaybackParametersChanged(playbackParameters: PlaybackParameters) {
-//                Log.e(TAG, "onPlaybackParametersChanged")
-//            }
-//
-//            override fun onTracksChanged(
-//                trackGroups: TrackGroupArray,
-//                trackSelections: TrackSelectionArray
-//            ) {
-//                Log.e(TAG, "onTracksChanged:")
-//            }
-//
-//            override fun onPlayerError(error: ExoPlaybackException) {
-//                Log.e(TAG, "onPlayerError")
-//            }
-//
-//            override fun onPlayerStateChanged(playWhenReady: Boolean, playbackState: Int) {
-//                when (playbackState) {
-//                    STATE_BUFFERING -> {
-//                        exoProgress.visibility = View.VISIBLE
-//                        Log.e(TAG, "onPlayerStateChanged - STATE_BUFFERING")
-//                    }
-//                    STATE_READY -> {
-//                        exoProgress.visibility = View.VISIBLE
-//                        Log.e(TAG, "onPlayerStateChanged - STATE_READY")
-//
-//                    }
-//                    STATE_IDLE -> {
-//                        Log.e(TAG, "onPlayerStateChanged - STATE_READY")
-//                    }
-//                    STATE_ENDED -> {
-//                        exoProgress.visibility = View.VISIBLE
-//                        Log.e(TAG, "onPlayerStateChanged - STATE_ENDED")
-//                    }
-//
-//                }
-//            }
-//
-//            override fun onLoadingChanged(isLoading: Boolean) {
-//                Log.e(TAG, "onLoadingChanged")
-//            }
-//
-//            override fun onPositionDiscontinuity(reason: Int) {
-//                Log.e(TAG, "onPositionDiscontinuity")
-//            }
-//
-//            override fun onRepeatModeChanged(repeatMode: Int) {
-//                Log.e(TAG, "onRepeatModeChanged")
-//            }
-//
-//            override fun onTimelineChanged(timeline: Timeline, reason: Int) {
-//                Log.e(TAG, "onTimelineChanged")
-//            }
-//        })
-//
+//    private fun preparePlayer(url: String, type: String) {
+//        val uri = Uri.parse(url)
+//        val mediaSource = buildMediaSource(uri, type)
+//        simpleExoPlayer.prepare(mediaSource)
 //    }
 
-    private fun preparePlayer(url: String, type: String) {
-        val uri = Uri.parse(url)
-        val mediaSource = buildMediaSource(uri, type)
-        simpleExoPlayer.prepare(mediaSource)
-    }
-
-    fun releasePlayer() {
-        playbackPosition = simpleExoPlayer.currentPosition
-        simpleExoPlayer.release()
-    }
+//    fun releasePlayer() {
+//        playbackPosition = simpleExoPlayer.currentPosition
+//        simpleExoPlayer.release()
+//    }
 
     private fun buildMediaSource(uri: Uri, type: String): MediaSource {
         return if (type == "dash") {
@@ -289,5 +215,7 @@ class PlaybackHomeViewPod @JvmOverloads constructor(
     interface Delegate {
         fun onTapPlay()
         fun onTapPause()
+        fun onTapTenSecond()
+        fun onTapThirtySecond()
     }
 }

@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.example.padc_thepodcast_tutorial_tyno.views.viewpods.MiniPlayBackViewPod  xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="15dp"
     app:cardElevation="15dp"
     app:cardBackgroundColor="@color/mediaBGColor"
+    android:backgroundTint="@color/mediaBGColor"
+    android:background="@color/mediaBGColor"
     >
     <RelativeLayout
         android:id="@+id/relativeLayoutOne"
@@ -32,6 +34,7 @@
             app:color="@color/progressColor"
             />
         <TextView
+            android:id="@+id/tvaudioLength"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="18:51"
@@ -165,9 +168,4 @@
                 android:textSize="22sp" />
         </LinearLayout>
     </RelativeLayout>
-
-
-
-
-
-</androidx.cardview.widget.CardView>
+</com.example.padc_thepodcast_tutorial_tyno.views.viewpods.MiniPlayBackViewPod>

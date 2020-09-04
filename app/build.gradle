@@ -52,6 +52,9 @@ dependencies {
     androidTestImplementation rootProject.ext.localTest.espresso
     implementation rootProject.ext.libraries.material
 
+    //mmText
+    implementation rootProject.ext.libraries.mmtext
+
     implementation rootProject.ext.libraries.glide
     kapt rootProject.ext.libraries.glidekapt
 

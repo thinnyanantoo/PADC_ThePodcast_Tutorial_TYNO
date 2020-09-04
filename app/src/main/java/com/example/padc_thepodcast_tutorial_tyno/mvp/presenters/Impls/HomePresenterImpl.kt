@@ -1,6 +1,7 @@
 package com.example.padc_thepodcast_tutorial_tyno.mvp.presenters.Impls
 
 import android.provider.MediaStore.Audio.Playlists.Members.PLAYLIST_ID
+import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import com.example.padc_thepodcast_tutorial_tyno.data.models.Impls.PodCastModelImpl
@@ -36,11 +37,22 @@ class HomePresenterImpl : HomePresenter, AbstractBasePresenter<HomeView>() {
         mView?.actionOnPauseTap()
     }
 
+    override fun onTapTenSecond() {
+        Log.e("Touch","Ten Seconds")
+    }
+
+    override fun onTapThirtySecond() {
+        Log.e("Touch","thirty Seconds")
+    }
+
+    override fun onTapTryAgain() {
+        loadAllPodCastFromApi()
+    }
+
     private fun requestAllRandomPodCast(lifecycleOwner: LifecycleOwner) {
         mView?.enableSwipeRefresh()
         mPodCastModel.getAllRandomPodCast(onError = {
             mView?.disableSwipeRefresh()
-            mView?.displayEmptyView()
         }).observe(lifecycleOwner, Observer {
             mView?.disableSwipeRefresh()
             if(it!=null){
@@ -49,7 +61,6 @@ class HomePresenterImpl : HomePresenter, AbstractBasePresenter<HomeView>() {
             else
             {
                 mView?.disableSwipeRefresh()
-                mView?.displayEmptyView()
             }
         })
     }
@@ -69,16 +80,13 @@ class HomePresenterImpl : HomePresenter, AbstractBasePresenter<HomeView>() {
         })
     }
 
-    override fun displayEmptyView() {
+    private fun loadAllPodCastFromApi(){
+        mPodCastModel.getAllUpNextListFromApiAndSaveToDatabase(onSuccess = {
 
+        },onError = {
+
+        })
     }
 
-    override fun enableSwipeRefresh() {
-
-    }
-
-    override fun disableSwipeRefresh() {
-
-    }
 
 }

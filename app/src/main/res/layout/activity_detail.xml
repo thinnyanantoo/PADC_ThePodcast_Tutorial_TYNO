@@ -146,6 +146,7 @@
                     android:textSize="15sp" />
 
                 <include
+                    android:id="@+id/vpMiniPlayback"
                     layout="@layout/mini_playback_view_pod"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

@@ -1,5 +1,6 @@
 package com.example.padc_thepodcast_tutorial_tyno.mvp.presenters.Impls
 
+import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import com.example.padc_thepodcast_tutorial_tyno.data.models.Impls.PodCastModelImpl
@@ -19,6 +20,22 @@ class DetailPresenterImpl : DetailPresenter, AbstractBasePresenter<DetailView>()
 
     override fun onSwipeRefresh(id: String,lifecycleOwner: LifecycleOwner) {
         getEpisode(id,lifecycleOwner)
+    }
+
+    override fun onTapPlay() {
+        Log.e("Tap","Play")
+    }
+
+    override fun onTapPause() {
+       Log.e("Tap","Pause")
+    }
+
+    override fun onTapTenSecond() {
+      Log.e("Tap","Ten Seconds")
+    }
+
+    override fun onTapThirtySecond() {
+        Log.e("Tap","thrity Seconds")
     }
 
     fun getEpisode(id : String,lifecycleOwner: LifecycleOwner){

@@ -7,10 +7,7 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.View
 import androidx.cardview.widget.CardView
-import com.example.padc_thepodcast_tutorial_tyno.data.vos.EpisodeDetailVO
 import com.example.padc_thepodcast_tutorial_tyno.data.vos.EpisodePlaylistVO
-import com.example.padc_thepodcast_tutorial_tyno.data.vos.RandomPodCastVO
-import com.example.padc_thepodcast_tutorial_tyno.data.vos.UpNextPlayListVO
 import com.google.android.exoplayer2.*
 import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
@@ -19,9 +16,9 @@ import com.google.android.exoplayer2.trackselection.TrackSelectionArray
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.util.Util
 import kotlinx.android.synthetic.main.mini_playback_view_pod.view.*
-import kotlinx.android.synthetic.main.play_back_view_pod.view.*
-import kotlinx.android.synthetic.main.play_back_view_pod.view.btnPause
-import kotlinx.android.synthetic.main.play_back_view_pod.view.btnPlay
+import kotlinx.android.synthetic.main.mini_playback_view_pod.view.btnPause
+import kotlinx.android.synthetic.main.mini_playback_view_pod.view.btnPlay
+
 
 class MiniPlayBackViewPod @JvmOverloads constructor(
     context: Context, attr: AttributeSet? = null, delfStyleAttr: Int = 0
@@ -87,11 +84,11 @@ class MiniPlayBackViewPod @JvmOverloads constructor(
             override fun onPlayerStateChanged(playWhenReady: Boolean, playbackState: Int) {
                 when (playbackState) {
                     PlaybackState.STATE_BUFFERING -> {
-                        exoPlayer.visibility = View.VISIBLE
+                        straightProgress.visibility = View.VISIBLE
                         Log.e(TAG, "onPlayerStateChanged - STATE_BUFFERING")
                     }
                     Player.STATE_READY -> {
-                        exoPlayer.visibility = View.VISIBLE
+                        straightProgress.visibility = View.VISIBLE
                         Log.e(TAG, "onPlayerStateChanged - STATE_READY")
 
                     }
@@ -99,7 +96,7 @@ class MiniPlayBackViewPod @JvmOverloads constructor(
                         Log.e(TAG, "onPlayerStateChanged - STATE_READY")
                     }
                     Player.STATE_ENDED -> {
-                        exoPlayer.visibility = View.VISIBLE
+                        straightProgress.visibility = View.VISIBLE
                         Log.e(TAG, "onPlayerStateChanged - STATE_ENDED")
                     }
 

@@ -8,7 +8,7 @@ import com.example.padc_thepodcast_tutorial_tyno.R
 import com.example.padc_thepodcast_tutorial_tyno.data.vos.GenereVO
 import com.example.padc_thepodcast_tutorial_tyno.views.viewholders.CategorySearchRecyclerViewHolder
 
-class CategorySearchRecyclerAdapter() : BaseRecyclerAdapter<CategorySearchRecyclerViewHolder, GenereVO>() {
+class CategorySearchRecyclerAdapter : BaseRecyclerAdapter<CategorySearchRecyclerViewHolder, GenereVO>() {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,

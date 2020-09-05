@@ -23,7 +23,6 @@ import kotlinx.android.synthetic.main.categories_recyclerview_view_pod.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.fragment_search.swipeRefreshLayout
-import kotlinx.android.synthetic.main.fragment_search.vpEmpty
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -63,11 +62,11 @@ class SearchFragment : Fragment(), SearchView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         mCategoryViewPod = vpCategorySearch as CategorySearchViewPod
-        hideEmptyView()
+       // hideEmptyView()
         setUpPresenter()
         setUpRecycler()
         disableSwipeRefresh()
-        setUpEmptyViewPod()
+        //setUpEmptyViewPod()
         mPresenter.onUiReady(this)
     }
 
@@ -81,9 +80,9 @@ class SearchFragment : Fragment(), SearchView {
     }
 
     private fun setUpEmptyViewPod(){
-        mViewPodEmpty = vpEmpty as EmptyViewPod
-        mViewPodEmpty.setEmptyData(EM_NO_PODCAST_AVAILABLE, EMPTY_IMAGE_URL)
-        mViewPodEmpty.setDelegate(mPresenter)
+//        mViewPodEmpty = vpEmpty as EmptyViewPod
+//        mViewPodEmpty.setEmptyData(EM_NO_PODCAST_AVAILABLE, EMPTY_IMAGE_URL)
+//        mViewPodEmpty.setDelegate(mPresenter)
     }
 
 
@@ -107,8 +106,6 @@ class SearchFragment : Fragment(), SearchView {
                 }
             }
     }
-
-
     override fun showGenereList(genereList: List<GenereVO>) {
         mCategoryViewPod.bindAdapter(mcategorySearchAdapter, genereList.toMutableList())
     }
@@ -118,11 +115,11 @@ class SearchFragment : Fragment(), SearchView {
     }
 
     override fun displayEmptyView() {
-      vpEmpty.visibility = View.VISIBLE
+//      vpEmpty.visibility = View.VISIBLE
     }
 
     override fun hideEmptyView() {
-        vpEmpty.visibility = View.GONE
+//        vpEmpty.visibility = View.GONE
     }
 
     override fun enableSwipeRefresh() {

@@ -8,8 +8,4 @@ import com.example.padc_thepodcast_tutorial_tyno.mvp.views.DownloadView
 class DownloadPresenterImpl : DownloadPresenter, AbstractBasePresenter<DownloadView>(){
     override fun onUiReady(lifecycleOwner: LifecycleOwner) {
     }
-    override fun onSwipeRefresh(lifecycleOwner: LifecycleOwner) {
-
-    }
-
 }

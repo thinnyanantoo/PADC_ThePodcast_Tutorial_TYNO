@@ -32,6 +32,11 @@ class PlaybackHomeViewPod @JvmOverloads constructor(
     context: Context, attr: AttributeSet? = null, delfStyleAttr: Int = 0
 ) : CardView(context, attr, delfStyleAttr) {
 
+    override fun onFinishInflate() {
+        super.onFinishInflate()
+        onCreatePlayBack()
+    }
+
     private var mDelegate: Delegate? = null
     private var TAG = "ERROR"
     private lateinit var simpleExoPlayer: SimpleExoPlayer
@@ -64,6 +69,7 @@ class PlaybackHomeViewPod @JvmOverloads constructor(
         onCreatePlayBack()
 
     }
+
 
 //    fun initExoPlayer() {
 //        simpleExoPlayer = SimpleExoPlayer.Builder(context).build()
@@ -103,31 +109,29 @@ class PlaybackHomeViewPod @JvmOverloads constructor(
 //        }
 //    }
 
+    var position : Long = 1L
     fun onCreatePlayBack() {
-        loadControl = DefaultLoadControl()
-      // bandwidthMeter = DefaultBandwidthMeter()
-      //  trackSelector = DefaultTrackSelector(AdaptiveTrackSelection.Factory(bandwidthMeter))
 
         simpleExoPlayer = ExoPlayerFactory.newSimpleInstance(context)
         dataSourceFactory = DefaultDataSourceFactory(context, Util.getUserAgent(context, "exoPlayerSample"))
 
-        //defaultHttpDataSource = DefaultHttpDataSource("exoplayer")
         mediaSource = ProgressiveMediaSource.Factory(dataSourceFactory).createMediaSource(Uri.parse(mpodCastData?.audio.toString()))
 
         with(simpleExoPlayer) {
             prepare(mediaSource, false, false)
+            position = currentPosition
             btnPlay.setOnClickListener {
-                 mDelegate?.onTapPlay()
-//                playWhenReady = true
-//                btnPlay.visibility = View.GONE
-//                btnPause.visibility = View.VISIBLE
+                playWhenReady = true
+              //  mDelegate?.onTapPlay()
+                btnPlay.visibility = View.GONE
+                btnPause.visibility = View.VISIBLE
             }
 
             btnPause.setOnClickListener {
-                mDelegate?.onTapPause()
-//                playWhenReady = false
-//                btnPause.visibility = View.GONE
-//                btnPlay.visibility = View.VISIBLE
+                playWhenReady = false
+              // mDelegate?.onTapPause()
+                btnPause.visibility = View.GONE
+                btnPlay.visibility = View.VISIBLE
             }
         }
 
@@ -150,19 +154,22 @@ class PlaybackHomeViewPod @JvmOverloads constructor(
             override fun onPlayerStateChanged(playWhenReady: Boolean, playbackState: Int) {
                 when (playbackState) {
                     STATE_BUFFERING -> {
-                        exoPlayer.visibility = View.VISIBLE
+                        exoPlayerProgress.visibility = View.VISIBLE
+                        exoPlayerProgress.setProgress(position.toInt())
                         Log.e(TAG, "onPlayerStateChanged - STATE_BUFFERING")
                     }
                     STATE_READY -> {
-                        exoPlayer.visibility = View.VISIBLE
+                        exoPlayerProgress.visibility = View.VISIBLE
                         Log.e(TAG, "onPlayerStateChanged - STATE_READY")
+                        exoPlayerProgress.setProgress(position.toInt())
 
                     }
                     STATE_IDLE -> {
                         Log.e(TAG, "onPlayerStateChanged - STATE_READY")
+                        exoPlayerProgress.setProgress(position.toInt())
                     }
                     STATE_ENDED -> {
-                        exoPlayer.visibility = View.VISIBLE
+                        exoPlayerProgress.visibility = View.VISIBLE
                         Log.e(TAG, "onPlayerStateChanged - STATE_ENDED")
                     }
 
@@ -210,6 +217,14 @@ class PlaybackHomeViewPod @JvmOverloads constructor(
 
     fun onDestroy() {
         simpleExoPlayer.playWhenReady = false
+    }
+
+    fun setPlayBackFalse(){
+        simpleExoPlayer.playWhenReady = false
+    }
+
+    fun setPlayBackTrue(){
+        simpleExoPlayer.playWhenReady = true
     }
 
     interface Delegate {

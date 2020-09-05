@@ -6,6 +6,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import com.example.padc_thepodcast_tutorial_tyno.data.models.Impls.PodCastModelImpl
 import com.example.padc_thepodcast_tutorial_tyno.data.models.PodCastModel
+import com.example.padc_thepodcast_tutorial_tyno.data.vos.EpisodePlaylistVO
 import com.example.padc_thepodcast_tutorial_tyno.mvp.presenter.HomePresenter
 import com.example.padc_thepodcast_tutorial_tyno.mvp.presenters.AbstractBasePresenter
 import com.example.padc_thepodcast_tutorial_tyno.mvp.views.HomeView
@@ -27,6 +28,10 @@ class HomePresenterImpl : HomePresenter, AbstractBasePresenter<HomeView>() {
 
     override fun onTapItem(podCastId : String) {
         mView?.navigateToDetailActivity(podCastId)
+    }
+
+    override fun onTapDownloadIcon(playlistVO: EpisodePlaylistVO) {
+
     }
 
     override fun onTapPlay() {
@@ -53,10 +58,12 @@ class HomePresenterImpl : HomePresenter, AbstractBasePresenter<HomeView>() {
         mView?.enableSwipeRefresh()
         mPodCastModel.getAllRandomPodCast(onError = {
             mView?.disableSwipeRefresh()
+            mView?.displayEmptyView()
         }).observe(lifecycleOwner, Observer {
             mView?.disableSwipeRefresh()
             if(it!=null){
                 mView?.displayRandomPodCastList(it)
+                mView?.displayEmptyView()
             }
             else
             {

@@ -18,10 +18,6 @@ class DetailPresenterImpl : DetailPresenter, AbstractBasePresenter<DetailView>()
 
     }
 
-    override fun onSwipeRefresh(id: String,lifecycleOwner: LifecycleOwner) {
-        getEpisode(id,lifecycleOwner)
-    }
-
     override fun onTapPlay() {
         Log.e("Tap","Play")
     }
@@ -44,7 +40,6 @@ class DetailPresenterImpl : DetailPresenter, AbstractBasePresenter<DetailView>()
           id,
           onError = {
           mView?.disableSwipeRefresh()
-          mView?.displayEmptyView()
       })
           .observe(lifecycleOwner, Observer {
               it?.let{
@@ -52,17 +47,4 @@ class DetailPresenterImpl : DetailPresenter, AbstractBasePresenter<DetailView>()
           }
           })
       }
-
-    override fun displayEmptyView() {
-        TODO("Not yet implemented")
-    }
-
-    override fun enableSwipeRefresh() {
-
-    }
-
-    override fun disableSwipeRefresh() {
-        TODO("Not yet implemented")
-    }
-
 }

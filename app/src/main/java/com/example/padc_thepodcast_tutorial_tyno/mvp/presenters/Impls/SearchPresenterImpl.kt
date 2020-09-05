@@ -36,7 +36,7 @@ class SearchPresenterImpl : SearchPresenter, AbstractBasePresenter<SearchView>()
     }
 
     fun loadAllGenereFromApi(){
-        mPodCatModle.getGenereFromApiAndSaveToDatabase({},{})
+      //  mPodCatModle.getGenereFromApiAndSaveToDatabase({},{})
     }
 
 }

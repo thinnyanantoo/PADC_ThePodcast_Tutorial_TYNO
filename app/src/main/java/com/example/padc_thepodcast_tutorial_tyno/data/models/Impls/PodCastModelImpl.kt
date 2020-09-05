@@ -10,6 +10,7 @@ import com.example.padc_thepodcast_tutorial_tyno.data.vos.EpisodeDetailVO
 import com.example.padc_thepodcast_tutorial_tyno.data.vos.EpisodePlaylistVO
 import com.example.padc_thepodcast_tutorial_tyno.data.vos.GenereVO
 import com.example.padc_thepodcast_tutorial_tyno.data.vos.RandomPodCastVO
+import com.example.padc_thepodcast_tutorial_tyno.network.responses.GetgenereResponse
 import com.example.padc_thepodcast_tutorial_tyno.utils.*
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -86,9 +87,10 @@ object PodCastModelImpl : PodCastModel, BaseModel() {
         onError: (String) -> Unit
     ) {
         mApi
-            .getGenere(TOP_LEVEL_ONLY, API_VALUE)
-            .map{
-                it.generes.toList() ?: listOf()
+            .getGenere(1, API_VALUE)
+            .map {
+                Log.e("KEy","Reach to response")
+                it.generes?.toList() ?: listOf()
             }
             .subscribeOn(Schedulers.io())
             .observeOn(
@@ -100,8 +102,6 @@ object PodCastModelImpl : PodCastModel, BaseModel() {
                 Log.e("error", it.localizedMessage)
                 onError(it.localizedMessage ?: EM_NO_INTERNET_CONNECTION)
             })
-
-
     }
 
     @SuppressLint("CheckResult")

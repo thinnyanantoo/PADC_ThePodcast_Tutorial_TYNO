@@ -25,13 +25,12 @@
             android:layout_height="wrap_content"
             android:text="05:15"
             android:textColor="@color/whit"/>
-        <com.example.padc_thepodcast_tutorial_tyno.views.components.StraightProgressBar
+        <ProgressBar
             android:id="@+id/straightProgress"
             android:layout_width="180dp"
             android:layout_height="4dp"
             android:layout_margin="@dimen/margin_medium_2"
-            app:strProgress="50"
-            app:color="@color/progressColor"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             />
         <TextView
             android:id="@+id/tvaudioLength"

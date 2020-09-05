@@ -111,16 +111,7 @@ class DownloadFragment : Fragment() , DownloadView{
             }
     }
 
-    override fun displayEmptyView() {
-
-    }
-
-    override fun enableSwipeRefresh() {
-
-    }
-
-    override fun disableSwipeRefresh() {
-
+    override fun navigateToDetail(id: String) {
     }
 }
 

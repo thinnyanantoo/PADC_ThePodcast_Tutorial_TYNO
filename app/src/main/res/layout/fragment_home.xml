@@ -80,6 +80,12 @@
                 android:layout_below="@+id/llOne"
                 android:background="@android:color/white"
                 >
+                <include
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/vpEmpty"
+                    android:visibility="gone"
+                    layout="@layout/view_pod_empty" />
 
             <include
                 android:id="@+id/vpPlayBack"
@@ -126,18 +132,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginEnd="@dimen/margin_medium_1"/>
+</RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 />
 
-    <include
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/vpEmpty"
-        layout="@layout/view_pod_empty"
-        android:visibility="gone"/>
-</RelativeLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

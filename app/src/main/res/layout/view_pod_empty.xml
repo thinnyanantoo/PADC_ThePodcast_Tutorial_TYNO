@@ -11,7 +11,7 @@
         android:scaleType="centerCrop"
         android:src="@drawable/empty"/>
 
-    <org.mmtextview.components.MMTextView
+    <TextView
         android:id="@+id/tvEmpty"
         android:text="@string/no_podcasts"
         android:layout_below="@id/ivEmptyImage"
@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-    <org.mmtextview.components.MMButton
+    <Button
         android:id="@+id/btnTryAgain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

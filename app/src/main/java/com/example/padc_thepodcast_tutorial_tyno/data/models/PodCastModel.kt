@@ -5,6 +5,7 @@ import com.example.padc_thepodcast_tutorial_tyno.data.vos.EpisodeDetailVO
 import com.example.padc_thepodcast_tutorial_tyno.data.vos.EpisodePlaylistVO
 import com.example.padc_thepodcast_tutorial_tyno.data.vos.GenereVO
 import com.example.padc_thepodcast_tutorial_tyno.data.vos.RandomPodCastVO
+import com.example.padc_thepodcast_tutorial_tyno.network.responses.GetgenereResponse
 import io.reactivex.CompletableOnSubscribe
 import io.reactivex.Observable
 import java.util.*

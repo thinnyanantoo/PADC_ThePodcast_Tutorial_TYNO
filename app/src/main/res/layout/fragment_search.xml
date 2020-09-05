@@ -66,12 +66,12 @@
             android:layout_below="@+id/textView"/>
 
     </RelativeLayout>
-        <include
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/vpEmpty"
-            layout="@layout/view_pod_empty"
-            android:visibility="gone"/>
+<!--        <include-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:id="@+id/vpEmpty"-->
+<!--            layout="@layout/view_pod_empty"-->
+<!--            android:visibility="gone"/>-->
 
     </FrameLayout>
 

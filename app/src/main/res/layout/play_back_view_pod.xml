@@ -99,21 +99,20 @@
                         <!--                        android:layout_height="10dp"-->
                         <!--                        android:layout_marginTop="22dp"-->
                         <!--                        android:layout_weight="1" />-->
-                        <com.google.android.exoplayer2.ui.DefaultTimeBar
-                            android:id="@+id/exoPlayer"
+                        <ProgressBar
+                            android:id="@+id/exoPlayerProgress"
                             android:layout_width="130dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_medium"
-                            app:buffered_color="@color/textColorTertary"
-                            app:played_color="@color/progressColor"
-                            app:unplayed_color="#000000" />
+                            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                            android:nestedScrollingEnabled="true"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="6dp"
-                            android:layout_toRightOf="@id/exoPlayer"
+                            android:layout_toRightOf="@id/exoPlayerProgress"
                             android:text="1h left"
                             android:textColor="#9CBECD" />
                     </RelativeLayout>

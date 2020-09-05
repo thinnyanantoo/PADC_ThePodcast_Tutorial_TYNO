@@ -7,5 +7,4 @@ import com.example.padc_thepodcast_tutorial_tyno.views.viewpods.PlaybackHomeView
 interface DetailPresenter : BasePresenter<DetailView>,PlaybackHomeViewPod.Delegate{
     fun onUiReady(id : String,lifecycleOwner: LifecycleOwner)
 
-    fun onSwipeRefresh(id: String,lifecycleOwner: LifecycleOwner)
 }

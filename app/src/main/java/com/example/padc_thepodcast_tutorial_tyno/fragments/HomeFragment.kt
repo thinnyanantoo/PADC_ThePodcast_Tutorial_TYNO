@@ -63,12 +63,14 @@ class HomeFragment : Fragment(), HomeView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setUpPresenter()
-        hideEmptyView()
         mPlayBackViewPod = vpPlayBack as PlaybackHomeViewPod
         mupNextViewPod = vpUpNext as UpNextHomeViewPod
+        mViewPodEmpty = vpEmpty as EmptyViewPod
+
+        hideEmptyView()
+      //  setUpPlayBackViewPod()
         setUpRecycler()
-        disableSwipeRefresh()
-        setUpEmptyViewPod()
+     //   setUpEmptyViewPod()
         mPresenter.onUiReady(this)
     }
 
@@ -78,7 +80,6 @@ class HomeFragment : Fragment(), HomeView {
     }
 
     private fun setUpEmptyViewPod(){
-        mViewPodEmpty = vpEmpty as EmptyViewPod
         mViewPodEmpty.setEmptyData(EM_NO_PODCAST_AVAILABLE, EMPTY_IMAGE_URL)
         mViewPodEmpty.setDelegate(mPresenter)
     }
@@ -88,16 +89,14 @@ class HomeFragment : Fragment(), HomeView {
         mPresenter.initPresenter(this)
     }
 
-//    private fun setUpPlayBack() {
-//        mPlayBackViewPod = vpPlayBack as PlaybackHomeViewPod
-//        mPlayBackViewPod.onCreatePlayBack()
-//
-//    }
+    private fun setUpPlayBackViewPod(){
+        mPlayBackViewPod.setDelegate(mPresenter)
+    }
 
-//    override fun onDestroy() {
-//        mPlayBackViewPod.onDestroy()
-//        super.onDestroy()
-//    }
+    override fun onDestroy() {
+        mPlayBackViewPod.onDestroy()
+        super.onDestroy()
+    }
 
 //    override fun onStart() {
 //
@@ -139,18 +138,21 @@ class HomeFragment : Fragment(), HomeView {
         context.let {
             btnPlay.visibility = View.GONE
             btnPause.visibility = View.VISIBLE
+            mPlayBackViewPod.setPlayBackTrue()
         }
     }
+
 
     override fun actionOnPauseTap() {
         context.let {
             btnPause.visibility = View.GONE
             btnPlay.visibility = View.VISIBLE
+            mPlayBackViewPod.setPlayBackFalse()
         }
-    }
+        }
+
 
     override fun displayRandomPodCastList(podCastList: RandomPodCastVO) {
-
         mPlayBackViewPod.setBindData(podCastList, requireContext())
     }
 
@@ -160,7 +162,7 @@ class HomeFragment : Fragment(), HomeView {
     }
 
     override fun displayEmptyView() {
-        vpEmpty.visibility = View.VISIBLE
+        vpEmpty.visibility = View.GONE
 
     }
 

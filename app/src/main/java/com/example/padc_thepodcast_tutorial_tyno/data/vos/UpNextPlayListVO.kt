@@ -1,10 +1,11 @@
 package com.example.padc_thepodcast_tutorial_tyno.data.vos
 
+import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.example.padc_thepodcast_tutorial_tyno.persistence.TypeConverters.PodCastTypeConverter
 import com.google.gson.annotations.SerializedName
-@TypeConverters(PodCastTypeConverter::class)
+@Entity(tableName = "upNextTable")
 data class UpNextPlayListVO(
     @PrimaryKey
     @SerializedName("id") var id: String,
@@ -21,6 +22,5 @@ data class UpNextPlayListVO(
     @SerializedName("explicit_content") var explicitContent: Boolean,
     @SerializedName("link") var link: String,
     @SerializedName("podcast")var podCastVO: PodCastVO
-
 )
 

@@ -51,7 +51,6 @@ class MainActivity : BaseActivity() , MainView {
                         }
                     }
                     return false
-
                 }
 
             })
@@ -67,7 +66,6 @@ class MainActivity : BaseActivity() , MainView {
     override fun disableSwipeRefresh() {
         TODO("Not yet implemented")
     }
-
 
 }
 

@@ -8,7 +8,6 @@ import com.example.padc_thepodcast_tutorial_tyno.persistence.TypeConverters.PodC
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "randomPodCast")
-@TypeConverters(PodCastTypeConverter::class)
 data class RandomPodCastVO(
     @PrimaryKey
     @SerializedName("id") var id: String,

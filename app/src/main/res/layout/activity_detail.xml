@@ -91,16 +91,24 @@
                         android:text="12  m"
                         android:textColor="@color/textColorPrimary"
                         android:textSize="15sp" />
+                    <ImageView
+                        android:id="@+id/whatshot"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_baseline_whatshot_24"
+                        android:tint="@color/colorPrimary"
+                        android:layout_toRightOf="@id/tvTimeDetail"
+                        android:layout_marginStart="16dp"/>
 
                     <TextView
                         android:id="@+id/tvText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="30dp"
+                        android:layout_marginStart="5dp"
                         android:layout_marginTop="2dp"
-                        android:layout_toRightOf="@id/tvTimeDetail"
+                        android:layout_toRightOf="@id/whatshot"
                         android:text="88"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@android:color/black"
                         android:textSize="15sp" />
 
                     <ImageView
@@ -149,10 +157,10 @@
                     android:id="@+id/vpMiniPlayback"
                     layout="@layout/mini_playback_view_pod"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_below="@+id/tvDetailDescription"
                     android:layout_marginStart="@dimen/margin_medium_3"
-                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginTop="4dp"
                     android:layout_marginEnd="@dimen/margin_medium_3" />
 
                 <RelativeLayout

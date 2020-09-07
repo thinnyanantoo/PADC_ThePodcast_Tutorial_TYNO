@@ -81,10 +81,16 @@ dependencies {
 
     implementation rootProject.ext.libraries.rxkotlin
     implementation rootProject.ext.libraries.rxandroid
-    implementation rootProject.ext.libraries.exoplayer
+ //   implementation rootProject.ext.libraries.exoplayer
 //    implementation rootProject.ext.libraries.exoplayerdash
 //    implementation rootProject.ext.libraries.exocore
 //    implementation rootProject.ext.libraries.exoplayerhls
+
+    implementation 'com.google.android.exoplayer:exoplayer:2.8.4'
+    implementation 'com.google.android.exoplayer:exoplayer-core:2.11.5'
+    implementation 'com.google.android.exoplayer:exoplayer-dash:2.11.5'
+    implementation 'com.google.android.exoplayer:exoplayer-ui:2.11.5'
+
 
 }
 repositories {

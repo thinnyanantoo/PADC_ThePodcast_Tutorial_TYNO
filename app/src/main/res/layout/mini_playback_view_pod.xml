@@ -1,15 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.example.padc_thepodcast_tutorial_tyno.views.viewpods.MiniPlayBackViewPod  xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView  xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="15dp"
     app:cardElevation="15dp"
+    android:layout_marginStart="20dp"
+    app:layout_goneMarginEnd="20dp"
+    android:layout_marginTop="4dp"
     app:cardBackgroundColor="@color/mediaBGColor"
     android:backgroundTint="@color/mediaBGColor"
     android:background="@color/mediaBGColor"
     >
-    <RelativeLayout
+    <com.google.android.exoplayer2.ui.PlayerControlView
+        android:id="@+id/miniPlaybackControlView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        app:controller_layout_id="@layout/player_view_pod"
+        app:fastforward_increment="30000"
+        app:rewind_increment="10000"
+        app:show_timeout="0"
+        app:played_color="@color/progressColor"
+        app:use_controller="false"
+        />
+ <!--<RelativeLayout
         android:id="@+id/relativeLayoutOne"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -69,28 +85,6 @@
                 android:layout_toRightOf="@id/textView"
                 android:layout_weight="1"
                 android:src="@drawable/ic_baseline_replay_10_24" />
-
-<!--            <FrameLayout-->
-<!--                android:id="@+id/frameLayout"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginStart="@dimen/dm_distance"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                android:layout_toRightOf="@id/ivReplay"-->
-<!--                android:layout_weight="1">-->
-
-<!--                <ImageView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="2dp"-->
-<!--                    android:src="@drawable/ic_baseline_lens_24" />-->
-
-<!--                <ImageView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_gravity="center"-->
-<!--                    android:src="@drawable/ic_baseline_pause_24" />-->
-<!--            </FrameLayout>-->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnPause"
                 style="@style/Widget.MaterialComponents.Button"
@@ -166,5 +160,5 @@
                 android:textColor="@android:color/white"
                 android:textSize="22sp" />
         </LinearLayout>
-    </RelativeLayout>
-</com.example.padc_thepodcast_tutorial_tyno.views.viewpods.MiniPlayBackViewPod>
+    </RelativeLayout>  -->
+</androidx.cardview.widget.CardView>

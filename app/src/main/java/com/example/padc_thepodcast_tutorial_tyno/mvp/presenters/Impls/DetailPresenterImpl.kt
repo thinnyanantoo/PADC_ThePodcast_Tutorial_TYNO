@@ -10,9 +10,12 @@ import com.example.padc_thepodcast_tutorial_tyno.mvp.presenters.BasePresenter
 import com.example.padc_thepodcast_tutorial_tyno.mvp.presenters.DetailPresenter
 import com.example.padc_thepodcast_tutorial_tyno.mvp.views.BaseView
 import com.example.padc_thepodcast_tutorial_tyno.mvp.views.DetailView
+import com.example.padc_thepodcast_tutorial_tyno.player.MediaPlayer
+import com.example.padc_thepodcast_tutorial_tyno.player.MediaPlayerImpl
 
 class DetailPresenterImpl : DetailPresenter, AbstractBasePresenter<DetailView>() {
     private  var mPodCastModle : PodCastModel = PodCastModelImpl
+    private val mediaPlayer = MediaPlayerImpl()
     override fun onUiReady(id: String,lifecycleOwner: LifecycleOwner) {
        // getEpisode(id,lifecycleOwner)
 
@@ -28,22 +31,15 @@ class DetailPresenterImpl : DetailPresenter, AbstractBasePresenter<DetailView>()
         )
     }
 
-    override fun onTapPlay() {
-        Log.e("Tap","Play")
+    override fun getPlayer() = mediaPlayer
+
+    override fun play(url: String) {
+         mediaPlayer.play(url)
     }
 
-    override fun onTapPause() {
-       Log.e("Tap","Pause")
+    override fun releasePlayer() {
+        mediaPlayer.releasePlayer()
     }
-
-    override fun onTapTenSecond() {
-      Log.e("Tap","Ten Seconds")
-    }
-
-    override fun onTapThirtySecond() {
-        Log.e("Tap", "thrity Seconds")
-    }
-
 
 
 

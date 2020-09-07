@@ -8,7 +8,6 @@ import com.example.padc_thepodcast_tutorial_tyno.persistence.daos.EpisodeDetailD
 interface DetailView : BaseView  {
     fun showDeail(episodeDetailVO: EpisodeDetailVO)
    // fun showDetailDownload(downloadVO: DownloadVO)
-    fun showbMiniPlayBack(episodeDetailVO: EpisodeDetailVO)
     fun enableSwipeRefresh()
     fun disableSwipeRefresh()
 }

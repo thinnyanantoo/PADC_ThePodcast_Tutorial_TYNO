@@ -1,14 +1,14 @@
 package com.example.padc_thepodcast_tutorial_tyno.fragments
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DownloadManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
+import android.text.Html
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +17,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProviders
+import com.bumptech.glide.Glide
 import com.example.padc_thepodcast_tutorial_tyno.R
 import com.example.padc_thepodcast_tutorial_tyno.activities.DetailActivity
 import com.example.padc_thepodcast_tutorial_tyno.adapters.UpNextHomeRecyclerAdapter
@@ -32,7 +33,6 @@ import com.example.padc_thepodcast_tutorial_tyno.views.viewpods.PlaybackHomeView
 import com.example.padc_thepodcast_tutorial_tyno.views.viewpods.UpNextHomeViewPod
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.play_back_view_pod.*
-import java.util.jar.Manifest
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -96,7 +96,7 @@ class HomeFragment : Fragment(), HomeView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setUpPresenter()
-        mPlayBackViewPod = vpPlayBack as PlaybackHomeViewPod
+     //   mPlayBackViewPod = vpPlayBack as PlaybackHomeViewPod
         mupNextViewPod = vpUpNext as UpNextHomeViewPod
         mViewPodEmpty = vpEmpty as EmptyViewPod
 
@@ -126,13 +126,10 @@ class HomeFragment : Fragment(), HomeView {
     }
 
     private fun setUpPlayBackViewPod(){
-        mPlayBackViewPod.setDelegate(mPresenter)
+      //  mPlayBackViewPod.setDelegate(mPresenter)
     }
 
-    override fun onDestroy() {
-        mPlayBackViewPod.onDestroy()
-        super.onDestroy()
-    }
+
 
 //    override fun onStart() {
 //
@@ -173,26 +170,44 @@ class HomeFragment : Fragment(), HomeView {
         }
     }
 
-    override fun actionOnPlayTap() {
-//        context.let {
-//            btnPlay.visibility = View.GONE
-//            btnPause.visibility = View.VISIBLE
-//            mPlayBackViewPod.setPlayBackTrue()
-//        }
-    }
-
-
-    override fun actionOnPauseTap() {
-//        context.let {
-//            btnPause.visibility = View.GONE
-//            btnPlay.visibility = View.VISIBLE
-//            mPlayBackViewPod.setPlayBackFalse()
-//        }
-        }
-
     override fun displayRandomPodCastList(podCastList: RandomPodCastVO) {
-        mPlayBackViewPod.setBindData(podCastList, requireContext())
+        Glide.with(this.requireContext())
+            .load(podCastList.image)
+            .into(ivrandomImage)
+        tvTitleInRandom.text = podCastList.title
+        tvTitleDesInRandom.text = Html.fromHtml(podCastList.description)
+        tvDetailInRandom.text = Html.fromHtml(podCastList.description)
+
+        playerControlView.player = mPresenter.getPlayer().getPlayerImpl(this.requireContext())
+        mPresenter.play(podCastList.audio.toString())
+
     }
+
+    override fun onStart() {
+        super.onStart()
+        mPresenter.getPlayer().getPlayerImpl(this.requireContext())
+    }
+
+    override fun onResume() {
+        super.onResume()
+        hideSystemUi()
+        mPresenter.getPlayer().getPlayerImpl(this.requireContext())
+    }
+
+    override fun onStop() {
+        super.onStop()
+        mPresenter.releasePlayer()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mPresenter.releasePlayer()
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        mPresenter.releasePlayer()
+    }
+
 
     override fun displayUpNextPlayList(upNextList: List<EpisodePlaylistVO>) {
         //  mupNextViewPod = vpUpNext as UpNextHomeViewPod
@@ -231,6 +246,7 @@ class HomeFragment : Fragment(), HomeView {
         } else {
             episodePlaylistVO?.let {
                 mPresenter?.ondownloadItem(activity as Context, it)
+                Toast.makeText(context, "Downloading", Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -259,6 +275,16 @@ class HomeFragment : Fragment(), HomeView {
                 }
             }
         }
+    }
+
+    @SuppressLint("InlinedApi")
+    private fun hideSystemUi() {
+        playerControlView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LOW_PROFILE
+                or View.SYSTEM_UI_FLAG_FULLSCREEN
+                or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION)
     }
 
 //    override fun checkResult(episodePlaylistVO: EpisodePlaylistVO) {

@@ -3,11 +3,16 @@ package com.example.padc_thepodcast_tutorial_tyno.views.viewpods
 import android.content.Context
 import android.media.session.PlaybackState
 import android.net.Uri
+import android.text.Html
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
 import androidx.cardview.widget.CardView
+import com.bumptech.glide.Glide
+import com.example.padc_thepodcast_tutorial_tyno.data.vos.DownloadVO
+import com.example.padc_thepodcast_tutorial_tyno.data.vos.EpisodeDetailVO
 import com.example.padc_thepodcast_tutorial_tyno.data.vos.EpisodePlaylistVO
+import com.example.padc_thepodcast_tutorial_tyno.data.vos.RandomPodCastVO
 import com.google.android.exoplayer2.*
 import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
@@ -18,6 +23,7 @@ import com.google.android.exoplayer2.util.Util
 import kotlinx.android.synthetic.main.mini_playback_view_pod.view.*
 import kotlinx.android.synthetic.main.mini_playback_view_pod.view.btnPause
 import kotlinx.android.synthetic.main.mini_playback_view_pod.view.btnPlay
+import kotlinx.android.synthetic.main.play_back_view_pod.view.*
 
 
 class MiniPlayBackViewPod @JvmOverloads constructor(
@@ -31,14 +37,27 @@ class MiniPlayBackViewPod @JvmOverloads constructor(
     private lateinit var dataSourceFactory: DefaultDataSourceFactory
     private lateinit var loadControl : LoadControl
 
-    private var mpodCastData: EpisodePlaylistVO ? = null
+    private var mpodCastData: EpisodeDetailVO ? = null
 
-    fun bindData(data : EpisodePlaylistVO?){
-        mpodCastData = data
-        tvaudioLength.text = data?.data?.audioLengthSec.toString()
+    companion object{
+        const val RADIO_URL =
+            "http://kastos.cdnstream.com/1345_32"
 
-        onCreatePlayBack()
     }
+
+    fun bindData(data : EpisodeDetailVO?){
+            mpodCastData = data
+          tvaudioLength.text = mpodCastData?.audio_length_sec
+            onCreatePlayBack()
+
+        }
+    //private var mdownloadData : DownloadVO? = null
+
+//    fun bindDownloadData(data : DownloadVO?){
+//        mdownloadData = data
+//        onCreatePlayBack()
+//    }
+
 
     fun onCreatePlayBack() {
         loadControl = DefaultLoadControl()
@@ -46,7 +65,10 @@ class MiniPlayBackViewPod @JvmOverloads constructor(
         simpleExoPlayer = ExoPlayerFactory.newSimpleInstance(context)
         dataSourceFactory = DefaultDataSourceFactory(context, Util.getUserAgent(context, "exoPlayerSample"))
 
-        mediaSource = ProgressiveMediaSource.Factory(dataSourceFactory).createMediaSource(Uri.parse(mpodCastData?.data?.audio.toString()))
+       // mediaSource = ProgressiveMediaSource.Factory(dataSourceFactory).createMediaSource(Uri.parse(mpodCastData?.data?.audio.toString()))
+       // mediaSource = ProgressiveMediaSource.Factory(dataSourceFactory).createMediaSource(Uri.parse( RADIO_URL))
+
+        mediaSource = ProgressiveMediaSource.Factory(dataSourceFactory).createMediaSource(Uri.parse( RADIO_URL))
 
         with(simpleExoPlayer) {
             prepare(mediaSource, false, false)
@@ -64,6 +86,7 @@ class MiniPlayBackViewPod @JvmOverloads constructor(
                 btnPlay.visibility = android.view.View.VISIBLE
             }
         }
+
 
         simpleExoPlayer.addListener(object : Player.EventListener {
             override fun onPlaybackParametersChanged(playbackParameters: PlaybackParameters) {
@@ -119,6 +142,10 @@ class MiniPlayBackViewPod @JvmOverloads constructor(
                 Log.e(TAG, "onTimelineChanged")
             }
         })
+
     }
+//    fun onDestroy() {
+//        simpleExoPlayer.playWhenReady = false
+//    }
 
 }

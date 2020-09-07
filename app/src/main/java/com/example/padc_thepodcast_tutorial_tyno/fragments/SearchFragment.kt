@@ -6,8 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.padc_thepodcast_tutorial_tyno.delegates.ItemDelegate
 import com.example.padc_thepodcast_tutorial_tyno.R
 import com.example.padc_thepodcast_tutorial_tyno.adapters.CategorySearchRecyclerAdapter
 import com.example.padc_thepodcast_tutorial_tyno.data.vos.GenereVO
@@ -61,18 +59,17 @@ class SearchFragment : Fragment(), SearchView {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        mCategoryViewPod = vpCategorySearch as CategorySearchViewPod
        // hideEmptyView()
+        mCategoryViewPod = vpCategorySearch as CategorySearchViewPod
         setUpPresenter()
         setUpRecycler()
-        disableSwipeRefresh()
         //setUpEmptyViewPod()
         mPresenter.onUiReady(this)
     }
 
     private fun setUpPresenter() {
         mPresenter = ViewModelProviders.of(activity!!).get(SearchPresenterImpl::class.java)
-
+        mPresenter.initPresenter(this)
     }
 
     private fun setUpRecycler() {
@@ -84,8 +81,6 @@ class SearchFragment : Fragment(), SearchView {
 //        mViewPodEmpty.setEmptyData(EM_NO_PODCAST_AVAILABLE, EMPTY_IMAGE_URL)
 //        mViewPodEmpty.setDelegate(mPresenter)
     }
-
-
 
     companion object {
         /**

@@ -5,23 +5,19 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.padc_thepodcast_tutorial_tyno.data.vos.EpisodeDetailVO
-import com.example.padc_thepodcast_tutorial_tyno.data.vos.EpisodePlaylistVO
-import com.example.padc_thepodcast_tutorial_tyno.data.vos.GenereVO
-import com.example.padc_thepodcast_tutorial_tyno.data.vos.RandomPodCastVO
-import com.example.padc_thepodcast_tutorial_tyno.persistence.TypeConverters.GenreTypeConverter
-import com.example.padc_thepodcast_tutorial_tyno.persistence.TypeConverters.PodCastTypeConverter
-import com.example.padc_thepodcast_tutorial_tyno.persistence.daos.EpisodeDetailDao
-import com.example.padc_thepodcast_tutorial_tyno.persistence.daos.GenereDao
-import com.example.padc_thepodcast_tutorial_tyno.persistence.daos.RandomPodCastDao
-import com.example.padc_thepodcast_tutorial_tyno.persistence.daos.UpNextPlayListDao
+import com.example.padc_thepodcast_tutorial_tyno.data.vos.*
+import com.example.padc_thepodcast_tutorial_tyno.persistence.TypeConverters.*
+import com.example.padc_thepodcast_tutorial_tyno.persistence.daos.*
 
 @Database(
-    entities = [RandomPodCastVO::class, EpisodePlaylistVO::class, EpisodeDetailVO::class, GenereVO::class],
+    entities = [RandomPodCastVO::class, EpisodePlaylistVO::class, EpisodeDetailVO::class, GenereVO::class,UpNextPlayListVO::class,DownloadVO::class],
     version = 1,
     exportSchema = false
 )
-@TypeConverters(PodCastTypeConverter::class,GenreTypeConverter::class)
+@TypeConverters(PodCastTypeConverter::class,PodCastDetialVOTypeConverter::class,
+    UpNextPlayListTypeConverters::class,ExtraVoTypeConverters::class,
+    GenreTypeConverter::class,
+    LookingForTypeConverters::class)
 abstract class PodCastDB : RoomDatabase() {
     companion object {
         val DB_NAME = "PodCastDB"
@@ -42,9 +38,9 @@ abstract class PodCastDB : RoomDatabase() {
             return i!!
         }
     }
-
     abstract fun RandomPodCastDao(): RandomPodCastDao
     abstract fun UpNextPlayListDao(): UpNextPlayListDao
     abstract fun EpisodeDetailDao(): EpisodeDetailDao
     abstract fun GenereDao(): GenereDao
+    abstract fun downloadDao(): DownloadDao
 }

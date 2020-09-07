@@ -18,5 +18,4 @@ class CategorySearchRecyclerAdapter : BaseRecyclerAdapter<CategorySearchRecycler
             .inflate(R.layout.rv_search_category_item, parent, false)
         return CategorySearchRecyclerViewHolder(view)
     }
-
 }

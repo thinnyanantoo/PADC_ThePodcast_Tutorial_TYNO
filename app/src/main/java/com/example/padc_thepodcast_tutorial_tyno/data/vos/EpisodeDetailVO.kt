@@ -10,23 +10,22 @@ import com.example.padc_thepodcast_tutorial_tyno.persistence.TypeConverters.PodC
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "detailTable")
-@TypeConverters(
-    PodCastDetialVOTypeConverter::class
-)
 data class EpisodeDetailVO(
-    @PrimaryKey
-    @SerializedName("id") var id: String,
-    @SerializedName("title") var title: String,
-    @SerializedName("description") var description: String,
-    @SerializedName("pub_data_ms") var pubDateMS: Int,
-    @SerializedName("audio") var audio: String,
-    @SerializedName("audio_length_sec") var audioLengthSec: Int,
-    @SerializedName("listennotes_url") var listenNotesUrl: String,
-    @SerializedName("image") var image: String,
-    @SerializedName("thumbnail") var thumbNail: String,
-    @SerializedName("maybe_audio_invalid") var maybeAudioInvalid: Boolean,
-    @SerializedName("listennotes_edit_url") var listenNotesEditUrl: String,
-    @SerializedName("explicit_content") var explicitContent: Boolean,
-    @SerializedName("link") var link: String,
-    @SerializedName("podcast") var podCast: List<PodCastDetailVO> = emptyList()
+   @SerializedName("audio")var audio: String,
+@SerializedName("audio_length_sec")var audio_length_sec: String,
+@SerializedName("description")var description: String,
+@SerializedName("explicit_content")var explicit_content: Boolean,
+
+@PrimaryKey
+@SerializedName("id")var id: String,
+@SerializedName("image")var image: String,
+@SerializedName("link")var link: String,
+@SerializedName("listennotes_edit_url")var listennotes_edit_url: String,
+@SerializedName("listennotes_url")var listennotes_url: String,
+@SerializedName("maybe_audio_invarid")var maybe_audio_invarid: Boolean,
+
+@SerializedName("podcast")var podcastVO: PodCastDetailVO,
+@SerializedName("pub_date_ms")var pub_date_ms: Long,
+@SerializedName("thumbnail")var thumbnail: String,
+@SerializedName("title")var title: String
 )

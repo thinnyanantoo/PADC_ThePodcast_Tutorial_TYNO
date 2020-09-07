@@ -27,11 +27,11 @@ interface PodCastApi {
     fun getDetail(
         @Path("id")id : String,
         @Header(API_KEY)apiKey : String
-    ) : Observable<List<EpisodeDetailVO>>
+    ) : Observable<EpisodeDetailVO>
 
     @GET("genres")
     fun getGenere(
-        @Query("top_level_only")toplevelOnly : Int,
-        @Header(API_KEY)apiKey : String
+        @Header(API_KEY)apiKey : String,
+        @Query("top_level_only") topLevel : String
     ) : Observable<GetgenereResponse>
 }

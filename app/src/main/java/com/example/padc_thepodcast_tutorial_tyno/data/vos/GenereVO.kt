@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName
 @Entity(tableName = "genereTable")
 data class GenereVO (
     @PrimaryKey
-    @SerializedName("id")var id: Int,
+    @SerializedName("id")var id: String,
     @SerializedName("parent_id")var parentId : Int,
     @SerializedName("name")var name : String
 

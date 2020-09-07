@@ -5,11 +5,13 @@ import android.media.session.PlaybackState.STATE_BUFFERING
 import android.net.Uri
 import android.net.sip.SipSession
 import android.os.Handler
+import android.text.Html
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
+import android.widget.SeekBar
 import androidx.cardview.widget.CardView
 import com.bumptech.glide.Glide
 import com.example.padc_thepodcast_tutorial_tyno.data.vos.RandomPodCastVO
@@ -46,6 +48,7 @@ class PlaybackHomeViewPod @JvmOverloads constructor(
     private lateinit var loadControl : LoadControl
 
     private var mpodCastData: RandomPodCastVO? = null
+    private var seekBarShow : SeekBar? = null
 
     companion object {
         const val RADIO_URL =
@@ -62,14 +65,13 @@ class PlaybackHomeViewPod @JvmOverloads constructor(
             .load(data?.image)
             .into(randomImage)
 
-    tvDetailInRandom.text = data?.description
+    tvDetailInRandom.text = Html.fromHtml(data?.description)
         tvTitleInRandom.text = data?.title
         tvTitleDesInRandom.text = data?.title
 
         onCreatePlayBack()
 
     }
-
 
 //    fun initExoPlayer() {
 //        simpleExoPlayer = SimpleExoPlayer.Builder(context).build()
@@ -115,25 +117,31 @@ class PlaybackHomeViewPod @JvmOverloads constructor(
         simpleExoPlayer = ExoPlayerFactory.newSimpleInstance(context)
         dataSourceFactory = DefaultDataSourceFactory(context, Util.getUserAgent(context, "exoPlayerSample"))
 
-        mediaSource = ProgressiveMediaSource.Factory(dataSourceFactory).createMediaSource(Uri.parse(mpodCastData?.audio.toString()))
+        //mediaSource = ProgressiveMediaSource.Factory(dataSourceFactory).createMediaSource(Uri.parse(mpodCastData?.audio.toString()))
+        mediaSource = ProgressiveMediaSource.Factory(dataSourceFactory).createMediaSource(Uri.parse(
+            RADIO_URL))
 
         with(simpleExoPlayer) {
             prepare(mediaSource, false, false)
-            position = currentPosition
+            seekTo(currentWindowIndex, currentPosition)
             btnPlay.setOnClickListener {
-                playWhenReady = true
+
               //  mDelegate?.onTapPlay()
                 btnPlay.visibility = View.GONE
                 btnPause.visibility = View.VISIBLE
+                playWhenReady = true
             }
 
             btnPause.setOnClickListener {
-                playWhenReady = false
+
               // mDelegate?.onTapPause()
+               // setProgress()
                 btnPause.visibility = View.GONE
                 btnPlay.visibility = View.VISIBLE
+                playWhenReady = false
             }
         }
+        initSeekBar()
 
         simpleExoPlayer.addListener(object : Player.EventListener {
             override fun onPlaybackParametersChanged(playbackParameters: PlaybackParameters) {
@@ -193,17 +201,56 @@ class PlaybackHomeViewPod @JvmOverloads constructor(
             }
         })
     }
+    var playing : Boolean = true
 
-//    private fun preparePlayer(url: String, type: String) {
-//        val uri = Uri.parse(url)
-//        val mediaSource = buildMediaSource(uri, type)
-//        simpleExoPlayer.prepare(mediaSource)
+
+//
+//    private fun setProgress(){
+//        var handle : Handler? = null
+//
+//        Log.e("TAG Play", simpleExoPlayer.duration.toString())
+//        seekBarShow!!.progress = 0
+//        seekBarShow!!.max = simpleExoPlayer.duration.toInt()
+//        tvDurationTime.text = simpleExoPlayer.duration.toString()
+//        if(handle == null){
+//            handle = Handler()
+//        }
+//        handler.post(object : Runnable {
+//            override fun run() {
+//
+//                if(simpleExoPlayer != null && playing) {
+//                    seekBarShow!!.max = simpleExoPlayer.duration.toInt()/1000
+//                    val currentPosition = simpleExoPlayer.currentPosition.toInt()/1000
+//                    seekBarShow!!.progress = currentPosition
+//                    handle.postDelayed(this,1000)
+//                }
+//            }
+//        })
+//
 //    }
 
-//    fun releasePlayer() {
-//        playbackPosition = simpleExoPlayer.currentPosition
-//        simpleExoPlayer.release()
-//    }
+    private fun initSeekBar(){
+        seekBarShow = exoPlayerProgress as SeekBar
+        seekBarShow!!.requestFocus()
+        seekBarShow!!.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
+                if(!p2){
+                    return
+                }
+                simpleExoPlayer.seekTo(p1 * 1000.toLong())
+            }
+
+            override fun onStartTrackingTouch(p0: SeekBar?) {
+
+            }
+
+            override fun onStopTrackingTouch(p0: SeekBar?) {
+
+            }
+        })
+        seekBarShow!!.max = 0
+        seekBarShow!!.max = simpleExoPlayer.duration.toInt() /1000
+    }
 
     private fun buildMediaSource(uri: Uri, type: String): MediaSource {
         return if (type == "dash") {

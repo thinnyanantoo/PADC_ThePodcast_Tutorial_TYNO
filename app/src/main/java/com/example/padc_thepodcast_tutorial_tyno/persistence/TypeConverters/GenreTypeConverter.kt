@@ -7,13 +7,13 @@ import com.google.gson.reflect.TypeToken
 
 class GenreTypeConverter {
     @TypeConverter
-    fun toString(genreList: ArrayList<Int>): String {
-        return Gson().toJson(genreList)
+    fun toString(commentList: List<Int>): String {
+        return Gson().toJson(commentList)
     }
 
     @TypeConverter
-    fun toJsonList(genreStr: String): ArrayList<Int> {
-        val genreListType = object : TypeToken<ArrayList<Int>>() {}.type
-        return Gson().fromJson(genreStr, genreListType)
+    fun toCommentList(commentListJsonStr: String): List<Int> {
+        val commentListType = object : TypeToken<List<Int>>() {}.type
+        return Gson().fromJson(commentListJsonStr, commentListType)
     }
 }

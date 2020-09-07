@@ -7,6 +7,7 @@ interface SearchView : BaseView {
     fun showGenereList (genereList : List<GenereVO>)
 
     fun showGenere(genereVO: GenereVO)
+
     fun displayEmptyView()
     fun enableSwipeRefresh()
     fun disableSwipeRefresh()

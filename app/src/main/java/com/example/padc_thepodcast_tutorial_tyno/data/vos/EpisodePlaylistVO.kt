@@ -7,7 +7,6 @@ import com.example.padc_thepodcast_tutorial_tyno.persistence.TypeConverters.UpNe
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "podcastUpNextEpisode")
-@TypeConverters(UpNextPlayListTypeConverters::class)
 data class EpisodePlaylistVO(
     @PrimaryKey
     @SerializedName("id") var id: Int,

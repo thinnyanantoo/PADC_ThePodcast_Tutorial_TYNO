@@ -7,12 +7,12 @@ import com.google.gson.reflect.TypeToken
 
 class PodCastDetialVOTypeConverter {
     @TypeConverter
-    fun toString(podCastDetailList: List<PodCastDetailVO>): String {
+    fun toString(podCastDetailList: PodCastDetailVO): String {
         return Gson().toJson(podCastDetailList)
     }
     @TypeConverter
-    fun toJsonList(podCastDetailStr: String): List<PodCastDetailVO> {
-        val podCastDetailListType = object : TypeToken<List<PodCastDetailVO>>() {}.type
+    fun toJsonList(podCastDetailStr: String): PodCastDetailVO {
+        val podCastDetailListType = object : TypeToken<PodCastDetailVO>() {}.type
         return Gson().fromJson(podCastDetailStr, podCastDetailListType)
     }
 

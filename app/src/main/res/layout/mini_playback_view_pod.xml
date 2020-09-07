@@ -106,6 +106,7 @@
                 app:iconGravity="textStart"
                 app:iconPadding="0dp"
                 app:iconSize="30dp"
+                android:visibility="gone"
                 android:layout_gravity="center"
                 android:backgroundTint="#6865AC"
                 android:layout_marginTop="12dp"
@@ -140,7 +141,6 @@
                 app:layout_constraintHorizontal_bias="0.175"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:visibility="gone"
                 app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Circle"
                 android:layout_weight="1"
                 />

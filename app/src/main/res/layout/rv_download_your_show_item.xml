@@ -10,7 +10,7 @@
     >
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:cardCornerRadius="@dimen/margin_medium_2"
         app:cardElevation="10dp"
         android:outlineProvider="bounds"
@@ -23,10 +23,11 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cvPodCas"
                 android:layout_width="80dp"
-                android:layout_height="wrap_content"
+                android:layout_height="110dp"
                 app:cardCornerRadius="15dp"
                 android:elevation="5dp">
                 <ImageView
+                    android:id="@+id/ivDownload"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/icon"
@@ -59,6 +60,7 @@
                     android:textSize="8sp"
                     />
                 <TextView
+                    android:id="@+id/ivTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/txt_tiltle"
@@ -69,6 +71,7 @@
                     android:layout_marginTop="@dimen/margin_card_medium"/>
 
                 <TextView
+                    android:id="@+id/ivTitleDescritpion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/txt_title_desc"

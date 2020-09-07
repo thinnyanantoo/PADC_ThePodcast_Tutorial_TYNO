@@ -14,8 +14,18 @@ import com.example.padc_thepodcast_tutorial_tyno.mvp.views.DetailView
 class DetailPresenterImpl : DetailPresenter, AbstractBasePresenter<DetailView>() {
     private  var mPodCastModle : PodCastModel = PodCastModelImpl
     override fun onUiReady(id: String,lifecycleOwner: LifecycleOwner) {
-        getEpisode(id,lifecycleOwner)
+       // getEpisode(id,lifecycleOwner)
 
+        mPodCastModle.getEpisodeDetailByIdFromApiAndSaveToDatabase(
+            id,{},{})
+
+        mPodCastModle.getEpisdeDetail(id).observe(
+            lifecycleOwner, Observer {
+                it?.let {
+                    mView?.showDeail(it)
+                }
+            }
+        )
     }
 
     override fun onTapPlay() {
@@ -31,20 +41,35 @@ class DetailPresenterImpl : DetailPresenter, AbstractBasePresenter<DetailView>()
     }
 
     override fun onTapThirtySecond() {
-        Log.e("Tap","thrity Seconds")
+        Log.e("Tap", "thrity Seconds")
     }
 
-    fun getEpisode(id : String,lifecycleOwner: LifecycleOwner){
-        mView?.enableSwipeRefresh()
-      mPodCastModle.getEpisdeDetail(
-          id,
-          onError = {
-          mView?.disableSwipeRefresh()
-      })
-          .observe(lifecycleOwner, Observer {
-              it?.let{
-              mView?.showDeail(it)
-          }
-          })
-      }
+
+
+
+//    fun getEpisode(id : String,lifecycleOwner: LifecycleOwner){
+//        mView?.enableSwipeRefresh()
+//      mPodCastModle.getEpisdeDetail(
+//          id,
+//          onError = {
+//          mView?.disableSwipeRefresh()
+//      })
+//          .observe(lifecycleOwner, Observer {
+//              it?.let{
+//              mView?.showDeail(it)
+//          }
+//          })
+//      }
+
+//    fun getDetailDownload(id : String, lifecycleOwner: LifecycleOwner)
+//    {
+//        mView?.enableSwipeRefresh()
+//        mPodCastModle.getDownloadDetail(
+//            id
+//        ).observe(lifecycleOwner, Observer {
+//            it?.let {
+//                mView?.showDetailDownload(it)
+//            }
+//        })
+//    }
 }

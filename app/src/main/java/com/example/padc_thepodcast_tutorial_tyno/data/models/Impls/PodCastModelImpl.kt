@@ -1,15 +1,14 @@
 package com.example.padc_thepodcast_tutorial_tyno.data.models.Impls
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.padc_thepodcast_tutorial_tyno.BuildConfig
+import com.example.padc_thepodcast_tutorial_tyno.DownloadLoading
 import com.example.padc_thepodcast_tutorial_tyno.data.models.BaseModel
 import com.example.padc_thepodcast_tutorial_tyno.data.models.PodCastModel
-import com.example.padc_thepodcast_tutorial_tyno.data.vos.EpisodeDetailVO
-import com.example.padc_thepodcast_tutorial_tyno.data.vos.EpisodePlaylistVO
-import com.example.padc_thepodcast_tutorial_tyno.data.vos.GenereVO
-import com.example.padc_thepodcast_tutorial_tyno.data.vos.RandomPodCastVO
+import com.example.padc_thepodcast_tutorial_tyno.data.vos.*
 import com.example.padc_thepodcast_tutorial_tyno.network.responses.GetgenereResponse
 import com.example.padc_thepodcast_tutorial_tyno.utils.*
 import io.reactivex.Observable
@@ -52,30 +51,10 @@ object PodCastModelImpl : PodCastModel, BaseModel() {
         return mTheDB.UpNextPlayListDao().getUpNextById(id)
     }
 
-    override fun getEpisdeDetail(id: String, onError: (String) -> Unit): LiveData<EpisodeDetailVO> {
-        return mTheDB.EpisodeDetailDao().getEpisodeById(id)
+    override fun getDownloadById(id: String): LiveData<DownloadVO> {
+        return mTheDB.downloadDao().getdownloadById(id)
     }
 
-    @SuppressLint("CheckResult")
-    override fun getEpisodeDetailByIdFromApiAndSaveToDatabase(
-        id: String,
-        onSuccess: () -> Unit,
-        onError: (String) -> Unit
-    ) {
-        mApi
-            .getDetail(id, API_VALUE)
-            .map {
-                it.toList() ?: listOf()
-            }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                mTheDB.EpisodeDetailDao().insertAllDetail(it)
-            }, {
-                Log.e("error", it.localizedMessage)
-                onError(it.localizedMessage ?: EM_NO_INTERNET_CONNECTION)
-            })
-    }
 
     override fun getGenere(onError: (String) -> Unit): LiveData<List<GenereVO>> {
         return mTheDB.GenereDao().getAllGenere()
@@ -87,10 +66,9 @@ object PodCastModelImpl : PodCastModel, BaseModel() {
         onError: (String) -> Unit
     ) {
         mApi
-            .getGenere(1, API_VALUE)
+            .getGenere(API_VALUE, TOP_LEVEL_ONLY)
             .map {
-                Log.e("KEy","Reach to response")
-                it.generes?.toList() ?: listOf()
+                it.generes.toList()
             }
             .subscribeOn(Schedulers.io())
             .observeOn(
@@ -98,6 +76,57 @@ object PodCastModelImpl : PodCastModel, BaseModel() {
             )
             .subscribe({
                 mTheDB.GenereDao().insertAllGenere(it)
+            }, {
+                Log.e("error", it.localizedMessage)
+                onError(it.localizedMessage ?: EM_NO_INTERNET_CONNECTION)
+            })
+    }
+
+    override fun startdownladPlaylist(
+        context: Context,
+        episodePlaylistVO: EpisodePlaylistVO
+    ) {
+        DownloadLoading(context,episodePlaylistVO)
+    }
+
+    override fun getAllDownload(onError: (String) -> Unit): LiveData<List<DownloadVO>> {
+          return mTheDB.downloadDao().getAllDownloadedItem()
+    }
+
+    override fun getDownloadDetail(id: String): LiveData<DownloadVO> {
+        return mTheDB.downloadDao().getdownloadById(id)
+    }
+
+    override fun getDownloadItme(
+        downloadVO: DownloadVO,
+        onSuccess: () -> Unit,
+        onError: (String) -> Unit
+    ) {
+        mTheDB.downloadDao().inserttoDownload(downloadVO)
+
+    }
+
+    override fun getEpisdeDetail(id: String): LiveData<EpisodeDetailVO> {
+        return mTheDB.EpisodeDetailDao().getEpisodeById(id)
+    }
+
+    @SuppressLint("CheckResult")
+    override fun getEpisodeDetailByIdFromApiAndSaveToDatabase(
+        id: String,
+        onSuccess: () -> Unit,
+        onError: (String) -> Unit
+    ) {
+        mApi
+            .getDetail("4d3fe717742d4963a85562e9f84d8c79", API_VALUE)
+            .map {
+                it
+            }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                it?.let{ episode ->
+                    mTheDB.EpisodeDetailDao().insertDetail(episode)
+                }
             }, {
                 Log.e("error", it.localizedMessage)
                 onError(it.localizedMessage ?: EM_NO_INTERNET_CONNECTION)
@@ -127,4 +156,5 @@ object PodCastModelImpl : PodCastModel, BaseModel() {
                     onError(it.localizedMessage ?: EM_NO_INTERNET_CONNECTION)
                 })
     }
+
 }

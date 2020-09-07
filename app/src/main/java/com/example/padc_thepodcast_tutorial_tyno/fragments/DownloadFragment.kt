@@ -1,5 +1,6 @@
 package com.example.padc_thepodcast_tutorial_tyno.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,13 +8,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.padc_thepodcast_tutorial_tyno.delegates.ItemDelegate
 import com.example.padc_thepodcast_tutorial_tyno.R
 import com.example.padc_thepodcast_tutorial_tyno.activities.DetailActivity
 import com.example.padc_thepodcast_tutorial_tyno.adapters.YourShowsRecyclerAdapter
+import com.example.padc_thepodcast_tutorial_tyno.data.vos.DownloadVO
+import com.example.padc_thepodcast_tutorial_tyno.data.vos.UpNextPlayListVO
 import com.example.padc_thepodcast_tutorial_tyno.mvp.presenters.DownloadPresenter
 import com.example.padc_thepodcast_tutorial_tyno.mvp.presenters.Impls.DownloadPresenterImpl
 import com.example.padc_thepodcast_tutorial_tyno.mvp.views.DownloadView
+import com.example.padc_thepodcast_tutorial_tyno.utils.DOWNLOAD
 import kotlinx.android.synthetic.main.fragment_download.*
 import kotlinx.android.synthetic.main.your_show_recycler_view_pod.*
 
@@ -56,10 +59,11 @@ class DownloadFragment : Fragment() , DownloadView{
 
         setUpPresenter()
         setUpRecycler()
-        if (myourShowAdapter.itemCount == 0) {
-            showReloadView()
-        }
         gotoBack()
+//        if (myourShowAdapter.itemCount == 0) {
+//            showReloadView()
+//        }
+        mPresenter.onUiReady(this)
     }
 
     private fun setUpPresenter(){
@@ -68,12 +72,11 @@ class DownloadFragment : Fragment() , DownloadView{
     }
 
     private fun setUpRecycler(){
-        myourShowAdapter = YourShowsRecyclerAdapter()
+        myourShowAdapter = YourShowsRecyclerAdapter(mPresenter)
         val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         rvYourShow.layoutManager = linearLayoutManager
         rvYourShow.adapter = myourShowAdapter
     }
-
 
     private fun gotoBack() {
         ivBack.setOnClickListener {
@@ -111,8 +114,17 @@ class DownloadFragment : Fragment() , DownloadView{
             }
     }
 
-    override fun navigateToDetail(id: String) {
+    override fun navigateToDetailFromDownload(id : String) {
+        context?.let {
+            startActivity(DetailActivity.newIntent(it,id))
+        }
     }
+
+    override fun showDownloadedItemList(upNextPlayListVO: List<DownloadVO>) {
+         myourShowAdapter.setData(upNextPlayListVO.toMutableList())
+    }
+
+
 }
 
 //    override fun showButtonSheetEmpty() {

@@ -13,4 +13,6 @@ interface HomeView : BaseView{
     fun hideEmptyView()
     fun enableSwipeRefresh()
     fun disableSwipeRefresh()
+
+    fun selectedDownloadItem(episodePlaylistVO: EpisodePlaylistVO)
 }

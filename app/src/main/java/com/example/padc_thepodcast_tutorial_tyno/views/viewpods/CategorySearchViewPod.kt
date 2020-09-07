@@ -18,7 +18,7 @@ class CategorySearchViewPod @JvmOverloads constructor(
         categorySearchRecyclerAdapter: CategorySearchRecyclerAdapter,
         categoryList: MutableList<GenereVO>
         ) {
-        val linearLayoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
+        val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         rvCategorySearch.layoutManager = linearLayoutManager
         rvCategorySearch.adapter = categorySearchRecyclerAdapter
             categorySearchRecyclerAdapter.setData(categoryList)

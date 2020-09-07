@@ -1,6 +1,6 @@
 package com.example.padc_thepodcast_tutorial_tyno.utils
 
-const val BASE_URL = "https://5854d204-c33f-465e-a798-d68d6b6271ec.mock.pstmn.io/"
+const val BASE_URL = "https://eca10553-0ab3-46ef-8151-158cd26d95cf.mock.pstmn.io/"
 
 const val API_KEY = "X-ListenAPI-Key"
 const val API_VALUE = "1482256d06c14502a542d48c95407f18"
@@ -12,8 +12,9 @@ const val EM_NO_INTERNET_CONNECTION = "NO Internet Connection"
 const val PLAYLIST_ID  = "m1pe7z60bsw"
 const val TYPE = "episode_list"
 const val LAST_TIME_STAMP = "0"
-const val TOP_LEVEL_ONLY = 1
+const val TOP_LEVEL_ONLY = "0"
 const val SORT = "recent_added_first"
+const val DOWNLOAD = "download"
 
 //Empty Image
 const val EMPTY_IMAGE_URL = "https://point-broadband.com/wp-content/uploads/2017/06/No-data-caps-graphic-e1497904686711.png"

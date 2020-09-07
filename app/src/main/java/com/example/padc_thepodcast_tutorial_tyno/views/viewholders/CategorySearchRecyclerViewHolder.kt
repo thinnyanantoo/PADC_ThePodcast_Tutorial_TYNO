@@ -9,13 +9,14 @@ import kotlinx.android.synthetic.main.rv_search_category_item.view.*
 
 class CategorySearchRecyclerViewHolder(itemView: View) : BaseViewHolder<GenereVO>(itemView) {
 
+    override fun bindData(data: GenereVO) {
+        itemView.tvItemName.text = data.name
+    }
     init {
         itemView.setOnClickListener {
             // delegate.onTapItem()
         }
     }
 
-    override fun bindData(data: GenereVO) {
-        itemView.tvItemName.text = data.name
-    }
+
 }

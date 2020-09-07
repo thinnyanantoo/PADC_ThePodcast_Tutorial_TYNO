@@ -10,14 +10,11 @@ interface GenereDao {
     @Query("SELECT * FROM genereTable")
     fun getAllGenere(): LiveData<List<GenereVO>>
 
-    @Query("SELECT * FROM genereTable WHERE id = :podcastId")
-    fun getGeneretById(podcastId: Int): LiveData<GenereVO>
+    @Query("SELECT * FROM genereTable WHERE id = :genreId")
+    fun getGeneretById(genreId: String): LiveData<GenereVO>
 
     @Query("DELETE FROM genereTable")
     fun deleteAll()
-
-    @Delete
-    fun deleteGenere(randomPodCastVO: GenereVO)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertGenere(genereVO: GenereVO)

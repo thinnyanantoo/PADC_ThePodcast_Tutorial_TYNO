@@ -12,11 +12,11 @@ class SearchPresenterImpl : SearchPresenter, AbstractBasePresenter<SearchView>()
     private var mPodCatModle : PodCastModel = PodCastModelImpl
 
     override fun onUiReady(lifecycleOwner: LifecycleOwner) {
-        getGenere(lifecycleOwner)
+        getGenereList(lifecycleOwner)
     }
 
     override fun onSwipeRefresh(lifecycleOwner: LifecycleOwner) {
-        getGenere(lifecycleOwner)
+        getGenereList(lifecycleOwner)
 
     }
 
@@ -24,7 +24,7 @@ class SearchPresenterImpl : SearchPresenter, AbstractBasePresenter<SearchView>()
         loadAllGenereFromApi()
     }
 
-    fun getGenere(lifecycleOwner: LifecycleOwner){
+    fun getGenereList(lifecycleOwner: LifecycleOwner){
         mView?.enableSwipeRefresh()
         mPodCatModle.getGenere(onError = {
             mView?.disableSwipeRefresh()

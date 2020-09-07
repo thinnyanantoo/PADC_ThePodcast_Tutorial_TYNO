@@ -7,13 +7,13 @@ import com.google.gson.reflect.TypeToken
 
 class ExtraVoTypeConverters {
     @TypeConverter
-    fun toString(extraList: ExtraVO): String {
-        return Gson().toJson(extraList)
+    fun toString(dataList:ExtraVO):String{
+        return Gson().toJson(dataList)
     }
 
     @TypeConverter
-    fun toJsonList(extraStr: String): ExtraVO {
-        val extraListType = object : TypeToken<ExtraVO>() {}.type
-        return Gson().fromJson(extraStr, extraListType)
+    fun toList(ListJsonStr:String): ExtraVO{
+        val dataListType = object : TypeToken<ExtraVO>(){}.type
+        return Gson().fromJson(ListJsonStr,dataListType)
     }
 }

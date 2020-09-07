@@ -7,13 +7,13 @@ import com.google.gson.reflect.TypeToken
 
 class LookingForTypeConverters {
     @TypeConverter
-    fun toString(lookingForList: LookingForVO): String {
-        return Gson().toJson(lookingForList)
+    fun toString(dataList: LookingForVO):String{
+        return Gson().toJson(dataList)
     }
 
     @TypeConverter
-    fun toJsonList(lookingForStr: String): LookingForVO {
-        val lookingForListType = object : TypeToken<LookingForVO>() {}.type
-        return Gson().fromJson(lookingForStr, lookingForListType)
+    fun toList(ListJsonStr:String): LookingForVO {
+        val dataListType = object : TypeToken<LookingForVO>(){}.type
+        return Gson().fromJson(ListJsonStr,dataListType)
     }
 }

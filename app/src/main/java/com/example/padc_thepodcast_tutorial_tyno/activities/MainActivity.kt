@@ -14,6 +14,13 @@ class MainActivity : BaseActivity() , MainView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        if(savedInstanceState == null) {
+            supportFragmentManager.beginTransaction().replace(
+                R.id.frameContainer, HomeFragment.newInstance("A", "B")
+            )
+                .commit()
+        }
+
         bottomNavigation.setOnNavigationItemSelectedListener (
             object :
                 BottomNavigationView.OnNavigationItemSelectedListener {

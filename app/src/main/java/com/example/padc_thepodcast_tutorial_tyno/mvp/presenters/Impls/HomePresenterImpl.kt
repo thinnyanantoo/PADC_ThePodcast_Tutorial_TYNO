@@ -41,12 +41,12 @@ class HomePresenterImpl : HomePresenter, AbstractBasePresenter<HomeView>(){
 
 
     override fun onTapUpNextItem(episodePlaylistVO: EpisodePlaylistVO) {
-        mView?.navigateToDetailActivity(episodePlaylistVO.data.id)
+        mView?.navigateToDetailActivity(episodePlaylistVO.data!!.id)
     }
 
     override fun onTapDownloadIcon(episodePlaylistVO: EpisodePlaylistVO) {
         val downloadVO = DownloadVO(
-            episodePlaylistVO.data.id, episodePlaylistVO.data.title, episodePlaylistVO.data.description,episodePlaylistVO.data.thumbNail, episodePlaylistVO.data.title.trim().substring(0,8)
+            episodePlaylistVO.data!!.id, episodePlaylistVO.data!!.title, episodePlaylistVO.data!!.description,episodePlaylistVO.data.thumbNail, episodePlaylistVO.data.title.trim().substring(0,8)
         )
         mPodCastModel?.getDownloadItme(downloadVO,onSuccess = {},onError = {})
         mView?.selectedDownloadItem(episodePlaylistVO)

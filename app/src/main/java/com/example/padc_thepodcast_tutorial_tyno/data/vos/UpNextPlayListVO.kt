@@ -12,7 +12,7 @@ data class UpNextPlayListVO(
     @SerializedName("title") val title: String,
     @SerializedName("description") val description: String,
     @SerializedName("pub_date_ms") var pubDateMS: Long,
-    @SerializedName("audio") var audio: String,
+    @SerializedName("audio") var audio: String ?= null,
     @SerializedName("audio_length_sec") var audioLengthSec: String,
     @SerializedName("listennotes_url") var listenNotesURl: String,
     @SerializedName("image") var image: String,

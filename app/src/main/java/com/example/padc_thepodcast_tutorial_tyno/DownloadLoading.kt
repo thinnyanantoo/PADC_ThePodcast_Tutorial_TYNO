@@ -9,7 +9,7 @@ import kotlin.coroutines.coroutineContext
 
 fun DownloadLoading(context: Context, episodePlaylistVO: EpisodePlaylistVO){
 //    val downloadId : Long
-        val uri = Uri.parse(episodePlaylistVO.data.audio)
+        val uri = Uri.parse(episodePlaylistVO.data!!.audio)
         val request = DownloadManager.Request(uri).apply{
         setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE)
         setTitle(episodePlaylistVO.data.title)

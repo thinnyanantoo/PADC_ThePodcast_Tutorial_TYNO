@@ -14,7 +14,7 @@ class UpNextHomeRecyclerViewHolder(itemView: View, delegate: ItemDelegate) :
     override fun bindData(data: EpisodePlaylistVO) {
         mData = data
         Glide.with(itemView.context)
-            .load(data.data.image)
+            .load(data.data!!.image)
             .into(itemView.upNextImage)
 
         itemView.upNextTitle.text = data.data.title

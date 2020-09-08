@@ -63,21 +63,21 @@ class DetailActivity : BaseActivity(), DetailView {
     }
 
     private fun setData(){
-        var episodePlaylistVO : EpisodePlaylistVO ? = null
         val id = intent.getStringExtra(PODCAST_KEY)
         mPodCastModel.getUpNextById(id.toString())
             .observe(this, Observer {
-                episodePlaylistVO?.let { it1 -> bindData(it1) }
+                it?.let { data ->
+                    bindData(data)}
             })
     }
 
     private fun bindData(episodePlaylistVO: EpisodePlaylistVO){
         Glide.with(this)
-            .load(episodePlaylistVO.data.image)
+            .load(episodePlaylistVO.data!!.image)
             .into(ivDetail)
-        tvDetailDescription.text = episodePlaylistVO.data.description
-        tvTimeDetail.text = episodePlaylistVO.data.audioLengthSec + "\tm"
-        tvTitleDetail.text = episodePlaylistVO.data.title
+        tvDetailDescription.text = episodePlaylistVO.data!!.description
+        tvTimeDetail.text = episodePlaylistVO.data!!.audioLengthSec + "\tm"
+        tvTitleDetail.text = episodePlaylistVO.data!!.title
     }
 
     override fun onStart() {

@@ -123,8 +123,6 @@ class DownloadFragment : Fragment() , DownloadView{
     override fun showDownloadedItemList(upNextPlayListVO: List<DownloadVO>) {
          myourShowAdapter.setData(upNextPlayListVO.toMutableList())
     }
-
-
 }
 
 //    override fun showButtonSheetEmpty() {

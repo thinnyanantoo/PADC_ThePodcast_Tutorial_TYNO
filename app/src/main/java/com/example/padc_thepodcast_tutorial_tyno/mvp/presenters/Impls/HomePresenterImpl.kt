@@ -49,7 +49,7 @@ class HomePresenterImpl : HomePresenter, AbstractBasePresenter<HomeView>(){
         val downloadVO = episodePlaylistVO.data!!.title?.let {
             DownloadVO(
                 episodePlaylistVO.data!!.id,
-                it, episodePlaylistVO.data!!.description!!,episodePlaylistVO.data.thumbNail!!, episodePlaylistVO.data.title!!.trim().substring(0,8)
+                it, episodePlaylistVO.data!!.description!!,episodePlaylistVO.data.pubDateMS,episodePlaylistVO.data.audio!!,episodePlaylistVO.data.audioLengthSec,episodePlaylistVO.data.listenNotesURl,episodePlaylistVO.data.image,episodePlaylistVO.data.thumbNail!!,episodePlaylistVO.data.audioInvalid,episodePlaylistVO.data.listenNotesEditUrl, episodePlaylistVO.data.title!!.trim().substring(0,8)
             )
         }
         mPodCastModel?.getDownloadItme(downloadVO!!,onSuccess = {},onError = {})

@@ -100,13 +100,13 @@ class DetailActivity : BaseActivity(), DetailView {
     private fun bindDownloadDetailData(downloadVO: DownloadVO){
         Glide.with(this)
         Glide.with(this)
-            .load(downloadVO.downloadPodCastUrl)
+            .load(downloadVO.image)
             .into(ivDetail)
-        tvDetailDescription.text = Html.fromHtml(downloadVO.downloadPodCastDescription)
+        tvDetailDescription.text = Html.fromHtml(downloadVO.description)
        // tvTimeDetail.text = episodePlaylistVO.data.audioLengthSec + "\tm"
-        tvTitleDetail.text = Html.fromHtml(downloadVO.downloadPodCastTitle)
+        tvTitleDetail.text = Html.fromHtml(downloadVO.title)
         miniPlaybackControlView.player = mPresenter.getPlayer().getPlayerImpl(this)
-        downloadVO.downloadAudioPath?.let { mPresenter.play(it) }
+        downloadVO.audio?.let { mPresenter.play(it) }
     }
 
 //    override fun onStart() {

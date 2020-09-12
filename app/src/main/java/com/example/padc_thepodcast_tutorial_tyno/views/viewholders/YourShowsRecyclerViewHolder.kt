@@ -12,10 +12,10 @@ class YourShowsRecyclerViewHolder(itemView: View,private var delegate: DownloadI
 
     override fun bindData(data: DownloadVO) {
         mData = data
-        itemView.ivTitle.text = data.downloadPodCastTitle
-        itemView.ivTitleDescritpion.text = Html.fromHtml(data.downloadPodCastDescription)
+        itemView.ivTitle.text = data.title
+        itemView.ivTitleDescritpion.text = Html.fromHtml(data.description)
         Glide.with(itemView.context)
-            .load(data.downloadPodCastUrl)
+            .load(data.image)
             .into(itemView.ivDownload)
     }
     init {

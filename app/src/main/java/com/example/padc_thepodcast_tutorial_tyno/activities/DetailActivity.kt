@@ -12,8 +12,10 @@ import com.bumptech.glide.Glide
 import com.example.padc_thepodcast_tutorial_tyno.R
 import com.example.padc_thepodcast_tutorial_tyno.data.models.Impls.PodCastModelImpl
 import com.example.padc_thepodcast_tutorial_tyno.data.models.PodCastModel
+import com.example.padc_thepodcast_tutorial_tyno.data.vos.DownloadVO
 import com.example.padc_thepodcast_tutorial_tyno.data.vos.EpisodeDetailVO
 import com.example.padc_thepodcast_tutorial_tyno.data.vos.EpisodePlaylistVO
+import com.example.padc_thepodcast_tutorial_tyno.data.vos.UpNextPlayListVO
 import com.example.padc_thepodcast_tutorial_tyno.mvp.presenters.DetailPresenter
 import com.example.padc_thepodcast_tutorial_tyno.mvp.presenters.Impls.DetailPresenterImpl
 import com.example.padc_thepodcast_tutorial_tyno.mvp.views.DetailView
@@ -25,7 +27,7 @@ class DetailActivity : BaseActivity(), DetailView {
 
     private lateinit var mPresenter: DetailPresenter
     private var mPodCastModel: PodCastModel = PodCastModelImpl
-    var podcastId: String? = ""
+    val EpisodePlaylistVO : EpisodePlaylistVO ? = null
 
     companion object {
         val PODCAST_KEY = "PODCAST_KEY"
@@ -41,9 +43,10 @@ class DetailActivity : BaseActivity(), DetailView {
 
         setUpPresenter()
         disableSwipeRefresh()
-        podcastId = intent.getStringExtra(PODCAST_KEY).toString()
+        val podcastId = intent.getStringExtra(PODCAST_KEY).toString()
        setData()
-        mPresenter.onUiReady(podcastId!!, this)
+        setDownloadData()
+        mPresenter.onUiReady(podcastId, this)
     }
 
     private fun setUpPresenter() {
@@ -63,53 +66,105 @@ class DetailActivity : BaseActivity(), DetailView {
     }
 
     private fun setData(){
-        val id = intent.getStringExtra(PODCAST_KEY)
-        mPodCastModel.getUpNextById(id.toString())
+        val id = intent.getStringExtra(PODCAST_KEY).toString()
+            mPodCastModel.getUpNextById(id)
+                .observe(this, Observer {
+                    it?.let { data->
+                        bindData(data)
+                    }
+                })
+        }
+
+    private fun setDownloadData(){
+        val id = intent.getStringExtra(PODCAST_KEY).toString()
+        mPodCastModel.getDownloadById(id)
             .observe(this, Observer {
-                it?.let { data ->
-                    bindData(data)}
+                it?.let { data->
+                   bindDownloadDetailData(data)
+                }
             })
     }
 
+
     private fun bindData(episodePlaylistVO: EpisodePlaylistVO){
         Glide.with(this)
-            .load(episodePlaylistVO.data!!.image)
+            .load(episodePlaylistVO.data.image)
             .into(ivDetail)
-        tvDetailDescription.text = episodePlaylistVO.data!!.description
-        tvTimeDetail.text = episodePlaylistVO.data!!.audioLengthSec + "\tm"
-        tvTitleDetail.text = episodePlaylistVO.data!!.title
+        tvDetailDescription.text = Html.fromHtml(episodePlaylistVO.data.description)
+        tvTimeDetail.text = episodePlaylistVO.data.audioLengthSec + "\tm"
+        tvTitleDetail.text = Html.fromHtml(episodePlaylistVO.data.title)
+        miniPlaybackControlView.player = mPresenter.getPlayer().getPlayerImpl(this)
+        episodePlaylistVO.data.audio?.let { mPresenter.play(it) }
     }
 
-    override fun onStart() {
-        super.onStart()
-        if (Util.SDK_INT > 23) {
-            mPresenter.getPlayer().getPlayerImpl(this)
-        }
+    private fun bindDownloadDetailData(downloadVO: DownloadVO){
+        Glide.with(this)
+        Glide.with(this)
+            .load(downloadVO.downloadPodCastUrl)
+            .into(ivDetail)
+        tvDetailDescription.text = Html.fromHtml(downloadVO.downloadPodCastDescription)
+       // tvTimeDetail.text = episodePlaylistVO.data.audioLengthSec + "\tm"
+        tvTitleDetail.text = Html.fromHtml(downloadVO.downloadPodCastTitle)
+        miniPlaybackControlView.player = mPresenter.getPlayer().getPlayerImpl(this)
+        downloadVO.downloadAudioPath?.let { mPresenter.play(it) }
     }
+
+//    override fun onStart() {
+//        super.onStart()
+//        if (Util.SDK_INT > 23) {
+//            mPresenter.getPlayer().getPlayerImpl(this)
+//        }
+//    }
+//
+//    override fun onResume() {
+//        super.onResume()
+//        hideSystemUi()
+//        if(Util.SDK_INT<=23)
+//        mPresenter.getPlayer().getPlayerImpl(this)
+//    }
+//
+//    override fun onStop() {
+//        super.onStop()
+//        if(Util.SDK_INT <= 23)
+//        mPresenter.releasePlayer()
+//    }
+//
+//    override fun onPause() {
+//        super.onPause()
+//        if(Util.SDK_INT <= 23)
+//        mPresenter.releasePlayer()
+//    }
+//
+//    override fun onDestroy() {
+//        super.onDestroy()
+//        mPresenter.releasePlayer()
+//    }
+override fun onStart() {
+    super.onStart()
+    mPresenter.getPlayer().getPlayerImpl(this)
+}
 
     override fun onResume() {
         super.onResume()
         hideSystemUi()
-        if(Util.SDK_INT<=23)
         mPresenter.getPlayer().getPlayerImpl(this)
     }
 
     override fun onStop() {
         super.onStop()
-        if(Util.SDK_INT <= 23)
         mPresenter.releasePlayer()
     }
 
     override fun onPause() {
         super.onPause()
-        if(Util.SDK_INT <= 23)
         mPresenter.releasePlayer()
     }
-
     override fun onDestroy() {
         super.onDestroy()
         mPresenter.releasePlayer()
     }
+
+
 
     override fun enableSwipeRefresh() {
         swipeRefreshLayout.isRefreshing = true

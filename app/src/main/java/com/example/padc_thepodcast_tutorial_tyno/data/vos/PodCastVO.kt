@@ -4,9 +4,9 @@ import com.google.gson.annotations.SerializedName
 
 data class PodCastVO(
     @SerializedName("id") var id: String,
-    @SerializedName("title") var title: String,
-    @SerializedName("publisher") var publisher: String,
-    @SerializedName("image") var image: String,
-    @SerializedName("thumbnail") var thumbNail: String,
-    @SerializedName("listennotes_url") var listenNotesUrl: String
+    @SerializedName("title") var title: String? = null,
+    @SerializedName("publisher") var publisher: String? =  null,
+    @SerializedName("image") var image: String? = null,
+    @SerializedName("thumbnail") var thumbNail: String? = null,
+    @SerializedName("listennotes_url") var listenNotesUrl: String? = null
 )

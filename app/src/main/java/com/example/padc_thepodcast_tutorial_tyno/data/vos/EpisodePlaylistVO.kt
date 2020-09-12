@@ -13,7 +13,7 @@ data class EpisodePlaylistVO(
     @SerializedName("type") var type: String,
     @SerializedName("notes") var notes: String,
     @SerializedName("added_at_ms") var addedAtMs: Long,
-    @SerializedName("data") val data: UpNextPlayListVO? = null
+    @SerializedName("data") val data: UpNextPlayListVO
 )
 
 

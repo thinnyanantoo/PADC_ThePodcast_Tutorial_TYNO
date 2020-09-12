@@ -11,6 +11,7 @@ class DownloadVO (
     val downloadPodCastDescription : String,
     val downloadPodCastUrl : String,
     val downloadAudioPath : String
+  // val downloadImage : String
 
 
 )

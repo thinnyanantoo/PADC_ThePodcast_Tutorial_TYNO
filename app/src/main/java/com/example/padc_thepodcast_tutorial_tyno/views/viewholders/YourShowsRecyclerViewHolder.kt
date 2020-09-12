@@ -22,6 +22,7 @@ class YourShowsRecyclerViewHolder(itemView: View,private var delegate: DownloadI
         itemView.setOnClickListener {
             mData?.let {
                 delegate.onTapDownloadItem(it.downloadId)
+               // delegate.onTapDownload(it)
             }
         }
     }

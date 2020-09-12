@@ -19,9 +19,14 @@ class DownloadPresenterImpl : DownloadPresenter, AbstractBasePresenter<DownloadV
               })
     }
 
+//    override fun onTapDownload(downloadVO: DownloadVO) {
+//        mView?.navigateToDetailFromDownload(downloadVO.downloadId)
+//    }
+
     override fun onTapDownloadItem(id  : String) {
         mView?.navigateToDetailFromDownload(id)
     }
+
 
 
 }

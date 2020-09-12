@@ -40,21 +40,25 @@ class HomePresenterImpl : HomePresenter, AbstractBasePresenter<HomeView>(){
     override fun releasePlayer() = player.releasePlayer()
 
 
-    override fun onTapUpNextItem(episodePlaylistVO: EpisodePlaylistVO) {
-        mView?.navigateToDetailActivity(episodePlaylistVO.data!!.id)
-    }
+//    override fun onTapUpNextItem(episodePlaylistVO: EpisodePlaylistVO) {
+//        mView?.navigateToDetailActivity(episodePlaylistVO.data.id)
+//
+//    }
 
     override fun onTapDownloadIcon(episodePlaylistVO: EpisodePlaylistVO) {
-        val downloadVO = DownloadVO(
-            episodePlaylistVO.data!!.id, episodePlaylistVO.data!!.title, episodePlaylistVO.data!!.description,episodePlaylistVO.data.thumbNail, episodePlaylistVO.data.title.trim().substring(0,8)
-        )
-        mPodCastModel?.getDownloadItme(downloadVO,onSuccess = {},onError = {})
+        val downloadVO = episodePlaylistVO.data!!.title?.let {
+            DownloadVO(
+                episodePlaylistVO.data!!.id,
+                it, episodePlaylistVO.data!!.description!!,episodePlaylistVO.data.thumbNail!!, episodePlaylistVO.data.title!!.trim().substring(0,8)
+            )
+        }
+        mPodCastModel?.getDownloadItme(downloadVO!!,onSuccess = {},onError = {})
         mView?.selectedDownloadItem(episodePlaylistVO)
     }
 
-//    override fun onTapItem(podCastId : String) {
-//        mView?.navigateToDetailActivity(podCastId)
-//    }
+    override fun onTapItem(podCastId : String) {
+        mView?.navigateToDetailActivity(podCastId)
+    }
 
     override fun onTapTryAgain() {
         loadAllPodCastFromApi()

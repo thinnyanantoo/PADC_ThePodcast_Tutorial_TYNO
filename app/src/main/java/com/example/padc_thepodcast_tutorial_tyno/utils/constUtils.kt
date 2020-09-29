@@ -1,7 +1,7 @@
 package com.example.padc_thepodcast_tutorial_tyno.utils
 
-const val BASE_URL = "https://dc7fa1af-a43a-42bc-a54a-e42ece2f0b59.mock.pstmn.io/"
-
+//const val BASE_URL = "https://dc7fa1af-a43a-42bc-a54a-e42ece2f0b59.mock.pstmn.io/"
+const val BASE_URL = "https://dc7fa1af-a43a-42bc-a54a-e43ce2f0b59.mock.pstmn.io/"
 const val API_KEY = "X-ListenAPI-Key"
 const val API_VALUE = "1482256d06c14502a542d48c95407f18"
 

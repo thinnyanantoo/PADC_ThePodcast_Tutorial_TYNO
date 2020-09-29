@@ -19,17 +19,26 @@ class DetailPresenterImpl : DetailPresenter, AbstractBasePresenter<DetailView>()
     override fun onUiReady(id: String,lifecycleOwner: LifecycleOwner) {
        // getEpisode(id,lifecycleOwner)
 
-        mPodCastModle.getEpisodeDetailByIdFromApiAndSaveToDatabase(
-            id,{},{})
+//        mPodCastModle.getEpisodeDetailByIdFromApiAndSaveToDatabase(
+//            id,{},{})
+//
+//        mPodCastModle.getEpisdeDetail(id).observe(
+//            lifecycleOwner, Observer {
+//                it?.let {
+//                    mView?.showDeail(it)
+//                }
+//            }
+//        )
+//
+//        mPodCastModle.getEpisdeDetail(
+//          id)
+//          .observe(lifecycleOwner, Observer {
+//              it?.let{
+//              mView?.showDeail(it)
+//          }
+//          })
+      }
 
-        mPodCastModle.getEpisdeDetail(id).observe(
-            lifecycleOwner, Observer {
-                it?.let {
-                    mView?.showDeail(it)
-                }
-            }
-        )
-    }
 
     override fun getPlayer() = mediaPlayer
 
@@ -41,21 +50,6 @@ class DetailPresenterImpl : DetailPresenter, AbstractBasePresenter<DetailView>()
         mediaPlayer.releasePlayer()
     }
 
-
-
-//    fun getEpisode(id : String,lifecycleOwner: LifecycleOwner){
-//        mView?.enableSwipeRefresh()
-//      mPodCastModle.getEpisdeDetail(
-//          id,
-//          onError = {
-//          mView?.disableSwipeRefresh()
-//      })
-//          .observe(lifecycleOwner, Observer {
-//              it?.let{
-//              mView?.showDeail(it)
-//          }
-//          })
-//      }
 
 //    fun getDetailDownload(id : String, lifecycleOwner: LifecycleOwner)
 //    {

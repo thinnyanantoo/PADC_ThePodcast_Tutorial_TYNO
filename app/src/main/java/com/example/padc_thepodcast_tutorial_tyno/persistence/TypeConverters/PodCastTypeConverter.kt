@@ -8,7 +8,7 @@ import com.google.gson.reflect.TypeToken
 class PodCastTypeConverter {
     @TypeConverter
     fun toString(lookingForList: PodCastVO): String {
-        return Gson().toJson(lookingForList)
+        return Gson().toJson(lookingForList!!)
     }
 
     @TypeConverter

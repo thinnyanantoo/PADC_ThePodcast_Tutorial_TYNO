@@ -7,7 +7,7 @@ import com.example.padc_thepodcast_tutorial_tyno.data.vos.DownloadVO
 import com.example.padc_thepodcast_tutorial_tyno.delegates.DownloadItemDelegate
 import kotlinx.android.synthetic.main.rv_download_your_show_item.view.*
 
-class YourShowsRecyclerViewHolder(itemView: View,private var delegate: DownloadItemDelegate) :
+class YourShowsRecyclerViewHolder(itemView: View, private var delegate: DownloadItemDelegate) :
     BaseViewHolder<DownloadVO>(itemView) {
 
     override fun bindData(data: DownloadVO) {
@@ -18,11 +18,12 @@ class YourShowsRecyclerViewHolder(itemView: View,private var delegate: DownloadI
             .load(data.image)
             .into(itemView.ivDownload)
     }
+
     init {
         itemView.setOnClickListener {
             mData?.let {
                 delegate.onTapDownloadItem(it.downloadId)
-               // delegate.onTapDownload(it)
+                delegate.onTapDownload(it)
             }
         }
     }

@@ -1,9 +1,12 @@
 package com.example.padc_thepodcast_tutorial_tyno.data.vos
 
+import androidx.room.PrimaryKey
+import com.google.firebase.database.IgnoreExtraProperties
 import com.google.gson.annotations.SerializedName
-
+@IgnoreExtraProperties
 data class PodCastVO(
-    @SerializedName("id") var id: String,
+    @PrimaryKey(autoGenerate = false)
+    @SerializedName("id") var id: String = "",
     @SerializedName("title") var title: String? = null,
     @SerializedName("publisher") var publisher: String? =  null,
     @SerializedName("image") var image: String? = null,

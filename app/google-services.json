@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "949184382257",
+    "firebase_url": "https://padcthepodcasttutorialtyno.firebaseio.com",
+    "project_id": "padcthepodcasttutorialtyno",
+    "storage_bucket": "padcthepodcasttutorialtyno.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:949184382257:android:d2f6c325fcd282216d9c10",
+        "android_client_info": {
+          "package_name": "com.example.padc_thepodcast_tutorial_tyno"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "949184382257-qb6ejpl288ms0mtl48bqpvbqlgjdqaft.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.padc_thepodcast_tutorial_tyno",
+            "certificate_hash": "a9dd24739eac4c856db508a210eb213a14d3ab79"
+          }
+        },
+        {
+          "client_id": "949184382257-fsc6iqaft1rc6huvioogudesrjhouri9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQRU88iatNAthw7mu7DYHtjVNOOfGwOME"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "949184382257-fsc6iqaft1rc6huvioogudesrjhouri9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -3,6 +3,8 @@ package com.example.padc_thepodcast_tutorial_tyno.mvp.presenter
 import android.content.Context
 import androidx.lifecycle.LifecycleOwner
 import com.example.padc_thepodcast_tutorial_tyno.data.vos.EpisodePlaylistVO
+import com.example.padc_thepodcast_tutorial_tyno.data.vos.LatestEpisodeVO
+import com.example.padc_thepodcast_tutorial_tyno.data.vos.PodCastDetailVO
 import com.example.padc_thepodcast_tutorial_tyno.data.vos.UpNextPlayListVO
 import com.example.padc_thepodcast_tutorial_tyno.delegates.ItemDelegate
 import com.example.padc_thepodcast_tutorial_tyno.mvp.presenters.BasePresenter
@@ -16,8 +18,8 @@ interface HomePresenter: BasePresenter<HomeView>,ItemDelegate, EmptyViewPod.Dele
 
     fun onSwipeRefresh(lifecycleOwner: LifecycleOwner)
 
-    fun ondownloadItem(context : Context, episodePlaylistVO: EpisodePlaylistVO)
-    //fun saveDownlaod(upNextPlayListVO: UpNextPlayListVO)
+    fun ondownloadItem(context : Context, episodePlaylistVO: LatestEpisodeVO)
+    fun saveDownlaod(upNextPlayListVO: UpNextPlayListVO)
 
     fun getPlayer() : MediaPlayer
     fun play(url : String)

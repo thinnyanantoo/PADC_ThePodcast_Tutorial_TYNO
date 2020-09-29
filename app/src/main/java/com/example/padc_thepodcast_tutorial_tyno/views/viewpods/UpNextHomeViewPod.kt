@@ -6,6 +6,9 @@ import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.padc_thepodcast_tutorial_tyno.adapters.UpNextHomeRecyclerAdapter
 import com.example.padc_thepodcast_tutorial_tyno.data.vos.EpisodePlaylistVO
+import com.example.padc_thepodcast_tutorial_tyno.data.vos.LatestEpisodeVO
+import com.example.padc_thepodcast_tutorial_tyno.data.vos.PodCastDetailVO
+import com.example.padc_thepodcast_tutorial_tyno.data.vos.UpNextPlayListVO
 import kotlinx.android.synthetic.main.up_next_home_recycler_view_pod.view.*
 
 
@@ -15,7 +18,7 @@ class UpNextHomeViewPod @JvmOverloads constructor(
 
     fun bindAdapter(
         upNextHomeRecyclerAdapter: UpNextHomeRecyclerAdapter,
-        upNextList: MutableList<EpisodePlaylistVO>
+        upNextList: MutableList<LatestEpisodeVO>
     ) {
         val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         rvUpNextHome.layoutManager = linearLayoutManager

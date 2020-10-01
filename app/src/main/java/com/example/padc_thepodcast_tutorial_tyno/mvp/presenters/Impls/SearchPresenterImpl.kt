@@ -29,9 +29,9 @@ class SearchPresenterImpl : SearchPresenter, AbstractBasePresenter<SearchView>()
         mPodCatModle.getGenere(onError = {
             mView?.disableSwipeRefresh()
             mView?.displayEmptyView()
-        }).observe(lifecycleOwner, Observer {
+        } ).observe(lifecycleOwner, Observer {
             mView?.showGenereList(it)
-            mView?.showGenere(it[0])
+            mView?.showGenere(it.get(0))
         })
     }
 

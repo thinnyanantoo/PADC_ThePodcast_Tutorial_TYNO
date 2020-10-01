@@ -1,34 +1,8 @@
 package com.example.padc_thepodcast_tutorial_tyno.views.viewpods
 
 import android.content.Context
-import android.media.session.PlaybackState.STATE_BUFFERING
-import android.net.Uri
-import android.net.sip.SipSession
-import android.os.Handler
-import android.text.Html
 import android.util.AttributeSet
-import android.util.Log
-import android.view.View
-import android.widget.LinearLayout
-import android.widget.RelativeLayout
-import android.widget.SeekBar
 import androidx.cardview.widget.CardView
-import com.bumptech.glide.Glide
-import com.example.padc_thepodcast_tutorial_tyno.data.vos.RandomPodCastVO
-import com.google.android.exoplayer2.*
-import com.google.android.exoplayer2.Player.*
-import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory
-import com.google.android.exoplayer2.extractor.ExtractorsFactory
-import com.google.android.exoplayer2.source.ExtractorMediaSource
-import com.google.android.exoplayer2.source.MediaSource
-import com.google.android.exoplayer2.source.ProgressiveMediaSource
-import com.google.android.exoplayer2.source.TrackGroupArray
-import com.google.android.exoplayer2.source.dash.DashMediaSource
-import com.google.android.exoplayer2.trackselection.TrackSelectionArray
-import com.google.android.exoplayer2.trackselection.TrackSelector
-import com.google.android.exoplayer2.upstream.*
-import com.google.android.exoplayer2.util.Util
-import kotlinx.android.synthetic.main.play_back_view_pod.view.*
 
 class PlaybackHomeViewPod @JvmOverloads constructor(
     context: Context, attr: AttributeSet? = null, delfStyleAttr: Int = 0

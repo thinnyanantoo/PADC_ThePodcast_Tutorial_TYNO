@@ -9,7 +9,7 @@ import com.example.padc_thepodcast_tutorial_tyno.persistence.TypeConverters.Look
 import com.example.padc_thepodcast_tutorial_tyno.persistence.TypeConverters.PodCastDetialVOTypeConverter
 import com.google.gson.annotations.SerializedName
 
-@Entity(tableName = "detailTable")
+
 data class EpisodeDetailVO(
    @SerializedName("audio")var audio: String,
 @SerializedName("audio_length_sec")var audio_length_sec: String,

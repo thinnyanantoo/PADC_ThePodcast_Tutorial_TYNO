@@ -12,10 +12,7 @@ import com.bumptech.glide.Glide
 import com.example.padc_thepodcast_tutorial_tyno.R
 import com.example.padc_thepodcast_tutorial_tyno.data.models.Impls.PodCastModelImpl
 import com.example.padc_thepodcast_tutorial_tyno.data.models.PodCastModel
-import com.example.padc_thepodcast_tutorial_tyno.data.vos.DownloadVO
-import com.example.padc_thepodcast_tutorial_tyno.data.vos.EpisodeDetailVO
-import com.example.padc_thepodcast_tutorial_tyno.data.vos.EpisodePlaylistVO
-import com.example.padc_thepodcast_tutorial_tyno.data.vos.UpNextPlayListVO
+import com.example.padc_thepodcast_tutorial_tyno.data.vos.*
 import com.example.padc_thepodcast_tutorial_tyno.mvp.presenters.DetailPresenter
 import com.example.padc_thepodcast_tutorial_tyno.mvp.presenters.Impls.DetailPresenterImpl
 import com.example.padc_thepodcast_tutorial_tyno.mvp.views.DetailView
@@ -44,8 +41,8 @@ class DetailActivity : BaseActivity(), DetailView {
         setUpPresenter()
         disableSwipeRefresh()
         val podcastId = intent.getStringExtra(PODCAST_KEY).toString()
-       setData()
-        setDownloadData()
+     setData()
+//        setDownloadData()
         mPresenter.onUiReady(podcastId, this)
     }
 
@@ -54,15 +51,17 @@ class DetailActivity : BaseActivity(), DetailView {
         mPresenter.initPresenter(this)
     }
 
-    override fun showDeail(episodeDetailVO: EpisodeDetailVO) {
-        Glide.with(this)
-            .load(episodeDetailVO.image)
-            .into(ivDetail)
-        tvDetailDescription.text = Html.fromHtml(episodeDetailVO.description)
-        tvTimeDetail.text = episodeDetailVO.audio_length_sec + "\tm"
-        tvTitleDetail.text = episodeDetailVO.title
-        miniPlaybackControlView.player = mPresenter.getPlayer().getPlayerImpl(this)
-        mPresenter.play(episodeDetailVO.audio)
+    override fun showDeail(episodeDetailVO: LatestEpisodeVO) {
+//        val podcastId = intent.getStringExtra(PODCAST_KEY).toString()
+//
+//        Glide.with(this)
+//            .load(episodeDetailVO.podCast.thumbNail)
+//            .into(ivDetail)
+//        tvDetailDescription.text = Html.fromHtml(episodeDetailVO.description)
+//        tvTimeDetail.text = episodeDetailVO.audioLengthSec.toString()+ "\tm"
+//        tvTitleDetail.text = episodeDetailVO.title
+//        miniPlaybackControlView.player = mPresenter.getPlayer().getPlayerImpl(this)
+//        mPresenter.play(episodeDetailVO.audio)
     }
 
     private fun setData(){
@@ -75,26 +74,26 @@ class DetailActivity : BaseActivity(), DetailView {
                 })
         }
 
-    private fun setDownloadData(){
-        val id = intent.getStringExtra(PODCAST_KEY).toString()
-        mPodCastModel.getDownloadById(id)
-            .observe(this, Observer {
-                it?.let { data->
-                   bindDownloadDetailData(data)
-                }
-            })
-    }
+//    private fun setDownloadData(){
+//        val id = intent.getStringExtra(PODCAST_KEY).toString()
+//        mPodCastModel.getDownloadById(id)
+//            .observe(this, Observer {
+//                it?.let { data->
+//                   bindDownloadDetailData(data)
+//                }
+//            })
+//    }
 
 
-    private fun bindData(episodePlaylistVO: EpisodePlaylistVO){
+    private fun bindData(episodePlaylistVO: LatestEpisodeVO){
         Glide.with(this)
-            .load(episodePlaylistVO.data.image)
+            .load(episodePlaylistVO.image)
             .into(ivDetail)
-        tvDetailDescription.text = Html.fromHtml(episodePlaylistVO.data.description)
-        tvTimeDetail.text = episodePlaylistVO.data.audioLengthSec + "\tm"
-        tvTitleDetail.text = Html.fromHtml(episodePlaylistVO.data.title)
+        tvDetailDescription.text = Html.fromHtml(episodePlaylistVO.description)
+        tvTimeDetail.text = episodePlaylistVO.audioLengthSec.toString()+ "\tm"
+        tvTitleDetail.text = Html.fromHtml(episodePlaylistVO.title)
         miniPlaybackControlView.player = mPresenter.getPlayer().getPlayerImpl(this)
-        episodePlaylistVO.data.audio?.let { mPresenter.play(it) }
+        episodePlaylistVO.audio.let { mPresenter.play(it) }
     }
 
     private fun bindDownloadDetailData(downloadVO: DownloadVO){
@@ -115,7 +114,7 @@ class DetailActivity : BaseActivity(), DetailView {
 //            mPresenter.getPlayer().getPlayerImpl(this)
 //        }
 //    }
-//
+
 //    override fun onResume() {
 //        super.onResume()
 //        hideSystemUi()

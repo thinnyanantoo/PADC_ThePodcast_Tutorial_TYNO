@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "124095167794",
+    "firebase_url": "https://podcast-app-4647b.firebaseio.com",
+    "project_id": "podcast-app-4647b",
+    "storage_bucket": "podcast-app-4647b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:124095167794:android:1ca2b6f90420d8b8c8ab2b",
+        "android_client_info": {
+          "package_name": "com.example.padc_thepodcast_tutorial_tyno"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "124095167794-5slfdgjrgr5h9n8d3kb4601mkg8sbjvu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhKcrXAvABIWn8_ycH-uBU5bMLK7f4mQY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "124095167794-5slfdgjrgr5h9n8d3kb4601mkg8sbjvu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

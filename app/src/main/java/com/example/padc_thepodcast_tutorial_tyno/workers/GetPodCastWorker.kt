@@ -8,9 +8,18 @@ class GetPodCastWorker(context: Context, workerParams: WorkerParameters) :
     BaseWorkers(context, workerParams) {
     override fun doWork(): Result {
         var result = Result.failure()
-        var id : String = ""
+        var id: String = ""
 
-        mPodCastModel.getAllRandomPodCastFromApiAndSaveToDatabase(
+        mPodCastModel.getAllRandomPodCastFromFireBaseAndSaveToDatabase(
+            onSuccess = {
+                result = Result.success()
+            },
+            onError =  {
+                result = Result.failure()
+            }
+        )
+
+        mPodCastModel.getUpNextListfromFirebaseToDatabase(
             onSuccess = {
                 result = Result.success()
             },
@@ -18,16 +27,7 @@ class GetPodCastWorker(context: Context, workerParams: WorkerParameters) :
                 result = Result.failure()
             }
         )
-
-        mPodCastModel.getAllUpNextListFromApiAndSaveToDatabase(
-            onSuccess = {
-                result = Result.success()
-            },
-            onError = {
-                result = Result.failure()
-            }
-        )
-        mPodCastModel.getGenereFromApiAndSaveToDatabase(
+        mPodCastModel.getGenereFromFireBaseAndSaveToDatabase(
             onSuccess = {
                 Log.e("KEy","Reach to response")
                 result = Result.success()
@@ -38,15 +38,7 @@ class GetPodCastWorker(context: Context, workerParams: WorkerParameters) :
             }
         )
 
-        mPodCastModel.getEpisodeDetailByIdFromApiAndSaveToDatabase(
-            id,
-            onSuccess = {
-                result = Result.success()
-            },
-            onError = {
-                result = Result.failure()
-            }
-        )
         return result
+
     }
 }

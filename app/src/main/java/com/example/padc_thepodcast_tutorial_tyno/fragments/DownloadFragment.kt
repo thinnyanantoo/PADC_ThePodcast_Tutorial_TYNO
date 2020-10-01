@@ -31,12 +31,12 @@ private const val ARG_PARAM2 = "param2"
  * Use the [DownloadFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class DownloadFragment : Fragment() , DownloadView{
+class DownloadFragment : Fragment(), DownloadView {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
-    private lateinit var mPresenter : DownloadPresenter
+    private lateinit var mPresenter: DownloadPresenter
     private lateinit var myourShowAdapter: YourShowsRecyclerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,12 +66,12 @@ class DownloadFragment : Fragment() , DownloadView{
         mPresenter.onUiReady(this)
     }
 
-    private fun setUpPresenter(){
+    private fun setUpPresenter() {
         mPresenter = ViewModelProviders.of(activity!!).get(DownloadPresenterImpl::class.java)
         mPresenter.initPresenter(this)
     }
 
-    private fun setUpRecycler(){
+    private fun setUpRecycler() {
         myourShowAdapter = YourShowsRecyclerAdapter(mPresenter)
         val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         rvYourShow.layoutManager = linearLayoutManager
@@ -114,24 +114,13 @@ class DownloadFragment : Fragment() , DownloadView{
             }
     }
 
-    override fun navigateToDetailFromDownload(id : String) {
+    override fun navigateToDetailFromDownload(id: String) {
         context?.let {
-            startActivity(DetailActivity.newIntent(it,id))
+            startActivity(DetailActivity.newIntent(it, id))
         }
     }
 
     override fun showDownloadedItemList(upNextPlayListVO: List<DownloadVO>) {
-         myourShowAdapter.setData(upNextPlayListVO.toMutableList())
+        myourShowAdapter.setData(upNextPlayListVO.toMutableList())
     }
 }
-
-//    override fun showButtonSheetEmpty() {
-//        val fragmentTransaction = fragmentManager!!.beginTransaction()
-//        val emptyBottomSheetDialogFragment = BottomSheetFragment.newInstance()
-//        fragmentTransaction.replace(R.id.frameContainer, BottomSheetFragment.newInstance())
-//        emptyBottomSheetDialogFragment.show(fragmentTransaction, BottomSheetFragment.BOTTOM_SHEET_TAG
-//        )
-//        fragmentTransaction.addToBackStack(null)
-//
-//    }
-

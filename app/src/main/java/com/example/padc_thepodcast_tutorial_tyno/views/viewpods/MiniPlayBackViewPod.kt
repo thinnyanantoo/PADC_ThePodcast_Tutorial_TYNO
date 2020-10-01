@@ -1,27 +1,8 @@
 package com.example.padc_thepodcast_tutorial_tyno.views.viewpods
 
 import android.content.Context
-import android.media.session.PlaybackState
-import android.net.Uri
-import android.text.Html
 import android.util.AttributeSet
-import android.util.Log
-import android.view.View
 import androidx.cardview.widget.CardView
-import com.bumptech.glide.Glide
-import com.example.padc_thepodcast_tutorial_tyno.data.vos.DownloadVO
-import com.example.padc_thepodcast_tutorial_tyno.data.vos.EpisodeDetailVO
-import com.example.padc_thepodcast_tutorial_tyno.data.vos.EpisodePlaylistVO
-import com.example.padc_thepodcast_tutorial_tyno.data.vos.RandomPodCastVO
-import com.google.android.exoplayer2.*
-import com.google.android.exoplayer2.source.MediaSource
-import com.google.android.exoplayer2.source.ProgressiveMediaSource
-import com.google.android.exoplayer2.source.TrackGroupArray
-import com.google.android.exoplayer2.trackselection.TrackSelectionArray
-import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
-import com.google.android.exoplayer2.util.Util
-import kotlinx.android.synthetic.main.mini_playback_view_pod.view.*
-import kotlinx.android.synthetic.main.play_back_view_pod.view.*
 
 
 class MiniPlayBackViewPod @JvmOverloads constructor(

@@ -10,7 +10,7 @@ import com.example.padc_thepodcast_tutorial_tyno.persistence.TypeConverters.*
 import com.example.padc_thepodcast_tutorial_tyno.persistence.daos.*
 
 @Database(
-    entities = [RandomPodCastVO::class, EpisodePlaylistVO::class, EpisodeDetailVO::class, GenereVO::class,UpNextPlayListVO::class,DownloadVO::class],
+    entities = [LatestEpisodeVO::class, EpisodePlaylistVO::class, PodCastDetailVO::class, GenereVO::class,UpNextPlayListVO::class,DownloadVO::class],
     version = 1,
     exportSchema = false
 )

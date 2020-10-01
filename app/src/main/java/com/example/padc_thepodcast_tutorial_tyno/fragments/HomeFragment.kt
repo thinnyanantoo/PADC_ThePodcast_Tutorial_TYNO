@@ -2,10 +2,7 @@ package com.example.padc_thepodcast_tutorial_tyno.fragments
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.DownloadManager
-import android.content.BroadcastReceiver
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.text.Html
@@ -22,7 +19,8 @@ import com.example.padc_thepodcast_tutorial_tyno.R
 import com.example.padc_thepodcast_tutorial_tyno.activities.DetailActivity
 import com.example.padc_thepodcast_tutorial_tyno.adapters.UpNextHomeRecyclerAdapter
 import com.example.padc_thepodcast_tutorial_tyno.data.vos.EpisodePlaylistVO
-import com.example.padc_thepodcast_tutorial_tyno.data.vos.RandomPodCastVO
+import com.example.padc_thepodcast_tutorial_tyno.data.vos.LatestEpisodeVO
+import com.example.padc_thepodcast_tutorial_tyno.data.vos.PodCastDetailVO
 import com.example.padc_thepodcast_tutorial_tyno.mvp.presenter.HomePresenter
 import com.example.padc_thepodcast_tutorial_tyno.mvp.presenters.Impls.HomePresenterImpl
 import com.example.padc_thepodcast_tutorial_tyno.mvp.views.HomeView
@@ -31,6 +29,7 @@ import com.example.padc_thepodcast_tutorial_tyno.utils.EM_NO_PODCAST_AVAILABLE
 import com.example.padc_thepodcast_tutorial_tyno.views.viewpods.EmptyViewPod
 import com.example.padc_thepodcast_tutorial_tyno.views.viewpods.PlaybackHomeViewPod
 import com.example.padc_thepodcast_tutorial_tyno.views.viewpods.UpNextHomeViewPod
+import io.grpc.InternalChannelz.id
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.play_back_view_pod.*
 
@@ -55,14 +54,14 @@ class HomeFragment : Fragment(), HomeView {
     private lateinit var mupNextViewPod: UpNextHomeViewPod
     private lateinit var mPlayBackViewPod: PlaybackHomeViewPod
     private lateinit var mupNextAdapter: UpNextHomeRecyclerAdapter
-    private lateinit var mViewPodEmpty : EmptyViewPod
+    private lateinit var mViewPodEmpty: EmptyViewPod
 
     private val PERMISSION_REQUEST_CODE = 101
 
 
     private var downloadLink: String = ""
     private var mData: EpisodePlaylistVO? = null
-    private var downloadId  :Long = 0
+    private var downloadId: Long = 0
 
 //    private val downloadReceiver = object: BroadcastReceiver() {
 //        override fun onReceive(p0: Context?, p1: Intent?) {
@@ -96,14 +95,10 @@ class HomeFragment : Fragment(), HomeView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setUpPresenter()
-     //   mPlayBackViewPod = vpPlayBack as PlaybackHomeViewPod
         mupNextViewPod = vpUpNext as UpNextHomeViewPod
         mViewPodEmpty = vpEmpty as EmptyViewPod
 
-        hideEmptyView()
-      //  setUpPlayBackViewPod()
         setUpRecycler()
-       // init()
         mPresenter.onUiReady(this)
     }
 
@@ -111,11 +106,7 @@ class HomeFragment : Fragment(), HomeView {
         mupNextAdapter = UpNextHomeRecyclerAdapter(mPresenter)
     }
 
-//    private fun init(){
-//        context?.registerReceiver(downloadReceiver,IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
-//    }
-
-    private fun setUpEmptyViewPod(){
+    private fun setUpEmptyViewPod() {
         mViewPodEmpty.setEmptyData(EM_NO_PODCAST_AVAILABLE, EMPTY_IMAGE_URL)
         mViewPodEmpty.setDelegate(mPresenter)
     }
@@ -125,26 +116,11 @@ class HomeFragment : Fragment(), HomeView {
         mPresenter.initPresenter(this)
     }
 
-    private fun setUpPlayBackViewPod(){
-      //  mPlayBackViewPod.setDelegate(mPresenter)
-    }
-
-
-
-//    override fun onStart() {
-//
-//        super.onStart()
-//    }
-
-//    override fun onStop() {
-//        mPlayBackViewPod.releasePlayer()
-//        super.onStop()
-//    }
-
     companion object {
 
-        fun newInstance() = HomeFragment().apply {  }
+        fun newInstance() = HomeFragment().apply { }
         const val REQUEST_CODE = 100
+
         /**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
@@ -170,18 +146,6 @@ class HomeFragment : Fragment(), HomeView {
         }
     }
 
-    override fun displayRandomPodCastList(podCastList: RandomPodCastVO) {
-        Glide.with(this.requireContext())
-            .load(podCastList.image)
-            .into(ivrandomImage)
-        tvTitleInRandom.text = podCastList.title
-        tvTitleDesInRandom.text = Html.fromHtml(podCastList.description)
-        tvDetailInRandom.text = Html.fromHtml(podCastList.description)
-
-        playerControlView.player = mPresenter.getPlayer().getPlayerImpl(this.requireContext())
-        mPresenter.play(podCastList.audio.toString())
-
-    }
 
     override fun onStart() {
         super.onStart()
@@ -203,14 +167,14 @@ class HomeFragment : Fragment(), HomeView {
         super.onPause()
         mPresenter.releasePlayer()
     }
+
     override fun onDestroy() {
         super.onDestroy()
         mPresenter.releasePlayer()
     }
 
-
-    override fun displayUpNextPlayList(upNextList: List<EpisodePlaylistVO>) {
-        //  mupNextViewPod = vpUpNext as UpNextHomeViewPod
+    override fun displayUpNextPlayList(upNextList: List<LatestEpisodeVO>) {
+        mupNextViewPod = vpUpNext as UpNextHomeViewPod
         mupNextViewPod.bindAdapter(mupNextAdapter, upNextList.toMutableList())
     }
 
@@ -232,16 +196,16 @@ class HomeFragment : Fragment(), HomeView {
         swipeRefreshLayout.isRefreshing = false
     }
 
-    override fun selectedDownloadItem(episodePlaylistVO: EpisodePlaylistVO) {
+    override fun selectedDownloadItem(episodePlaylistVO: LatestEpisodeVO) {
         setUpPermissions(episodePlaylistVO)
     }
 
-    fun setUpPermissions(episodePlaylistVO: EpisodePlaylistVO){
+    fun setUpPermissions(episodePlaylistVO: LatestEpisodeVO) {
         val permission = ContextCompat.checkSelfPermission(
             activity as Activity,
             android.Manifest.permission.WRITE_EXTERNAL_STORAGE
         )
-        if(permission != PackageManager.PERMISSION_GRANTED){
+        if (permission != PackageManager.PERMISSION_GRANTED) {
             makeRequest()
         } else {
             episodePlaylistVO?.let {
@@ -251,7 +215,7 @@ class HomeFragment : Fragment(), HomeView {
         }
     }
 
-    private fun makeRequest(){
+    private fun makeRequest() {
         ActivityCompat.requestPermissions(
             activity as Activity,
             arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE),
@@ -265,10 +229,10 @@ class HomeFragment : Fragment(), HomeView {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        when(requestCode) {
+        when (requestCode) {
             PERMISSION_REQUEST_CODE -> {
-                if(grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED){
-                    Toast.makeText(activity as Activity , "Permission Denied", Toast.LENGTH_SHORT)
+                if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(activity as Activity, "Permission Denied", Toast.LENGTH_SHORT)
                         .show()
                 } else {
                     Toast.makeText(context, "Permission Granded", Toast.LENGTH_LONG).show()
@@ -287,48 +251,17 @@ class HomeFragment : Fragment(), HomeView {
                 or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION)
     }
 
-//    override fun checkResult(episodePlaylistVO: EpisodePlaylistVO) {
-//        mData = episodePlaylistVO
-//        when{
-//            context?.let {
-//                ContextCompat.checkSelfPermission(
-//                    it,
-//                    android.Manifest.permission.WRITE_EXTERNAL_STORAGE
-//                )
-//            } == PackageManager.PERMISSION_GRANTED -> {
-//                context?.let {
-//                    downloadId = mPresenter.download(it, mData!!)
-//                }
-//            }
-//            else -> {
-//                requestPermissions(
-//                    arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE),
-//                    REQUEST_CODE
-//                )
-//            }
-//        }
-//    }
+    override fun randomList(randomList: PodCastDetailVO) {
+        Glide.with(this.requireContext())
+            .load(randomList.image)
+            .into(ivrandomImage)
+        tvTitleInRandom.text = randomList.title
+        tvTitleDesInRandom.text = Html.fromHtml(randomList.description)
+        tvDetailInRandom.text = Html.fromHtml(randomList.description)
 
-//    override fun onRequestPermissionsResult(
-//        requestCode: Int,
-//        permissions: Array<out String>,
-//        grantResults: IntArray
-//    ) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-//            when (requestCode) {
-//                REQUEST_CODE -> {
-//                    if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                        context?.let {
-//                            downloadId = mPresenter.download(it, mData!!)
-//                        }
-//                    } else {
-//                        // explain user
-//                    }
-//                    return
-//                }
-//                else -> {
-//
-//                }
-//            }
-//            }
-        }
+        playerControlView.player = mPresenter.getPlayer().getPlayerImpl(this.requireContext())
+        mPresenter.play(randomList.listennotes_url.toString())
+    }
+
+
+}

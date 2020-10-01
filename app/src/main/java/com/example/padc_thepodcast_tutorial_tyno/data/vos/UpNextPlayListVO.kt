@@ -4,12 +4,14 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.example.padc_thepodcast_tutorial_tyno.persistence.TypeConverters.PodCastTypeConverter
+import com.google.firebase.database.IgnoreExtraProperties
 import com.google.gson.annotations.SerializedName
 @Entity(tableName = "upNextTable")
+@IgnoreExtraProperties
 data class UpNextPlayListVO(
     @PrimaryKey
-    @SerializedName("id") var id: String,
-    @SerializedName("title") val title: String,
+    @SerializedName("id") var id: String = "",
+    @SerializedName("title") val title: String = "",
     @SerializedName("description") val description: String? = null,
     @SerializedName("pub_date_ms") var pubDateMS: Long? = null,
     @SerializedName("audio") var audio: String ?= null,

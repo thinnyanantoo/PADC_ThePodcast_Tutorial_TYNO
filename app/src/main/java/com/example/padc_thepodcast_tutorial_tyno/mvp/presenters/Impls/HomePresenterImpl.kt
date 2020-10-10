@@ -26,16 +26,15 @@ class HomePresenterImpl : HomePresenter, AbstractBasePresenter<HomeView>() {
         requestAllUpNextPodCastList(lifecycleOwner)
     }
 
-    fun requestAllRandomPodCast(lifecycleOwner: LifecycleOwner){
-        mPodCastModel.getAllRandom (
-            onError = {
-                mView?.disableSwipeRefresh()
-                mView?.displayEmptyView()
-            }).observe(lifecycleOwner, Observer {
-            if(it != null)
-            mView?.randomList(it)
-        }
-        )
+   fun requestAllRandomPodCast(lifecycleOwner: LifecycleOwner){
+       mPodCastModel.getRandomPodCast(
+           onError = {
+               mView?.disableSwipeRefresh()
+               mView?.displayEmptyView()
+           }).observe(lifecycleOwner, Observer {
+           mView?.randomList(it)
+       })
+
     }
 
     fun requestAllUpNextPodCastList(lifecycleOwner: LifecycleOwner){
@@ -52,16 +51,6 @@ class HomePresenterImpl : HomePresenter, AbstractBasePresenter<HomeView>() {
     override fun ondownloadItem(context: Context, episodePlaylistVO: LatestEpisodeVO) {
         mPodCastModel.startdownladPlaylist(context, episodePlaylistVO)
     }
-
-    override fun saveDownlaod(upNextPlayListVO: UpNextPlayListVO) {
-        TODO("Not yet implemented")
-    }
-
-
-    override fun onTapTryAgain() {
-        TODO("Not yet implemented")
-    }
-
 
     override fun getPlayer() = player
     override fun play(url: String) {

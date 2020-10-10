@@ -12,6 +12,10 @@ interface EpisodeDetailDao {
     @Query("SELECT * FROM detailTable")
     fun getEpisodes(): LiveData<List<LatestEpisodeVO>>
 
+    @Query("SELECT * FROM detailTable ORDER BY RANDOM() LIMIT 1")
+    fun getRandomEpisode() : LiveData<LatestEpisodeVO>
+    //fun getRandomEpisode()
+
     @Query("SELECT * FROM detailTable WHERE id = :episodeId")
     fun getEpisodeById(episodeId: String): LiveData<LatestEpisodeVO>
 

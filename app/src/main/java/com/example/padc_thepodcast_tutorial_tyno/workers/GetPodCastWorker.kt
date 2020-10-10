@@ -10,15 +10,6 @@ class GetPodCastWorker(context: Context, workerParams: WorkerParameters) :
         var result = Result.failure()
         var id: String = ""
 
-        mPodCastModel.getAllRandomPodCastFromFireBaseAndSaveToDatabase(
-            onSuccess = {
-                result = Result.success()
-            },
-            onError =  {
-                result = Result.failure()
-            }
-        )
-
         mPodCastModel.getUpNextListfromFirebaseToDatabase(
             onSuccess = {
                 result = Result.success()

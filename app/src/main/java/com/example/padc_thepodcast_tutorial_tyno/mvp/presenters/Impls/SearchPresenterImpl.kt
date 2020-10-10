@@ -20,9 +20,6 @@ class SearchPresenterImpl : SearchPresenter, AbstractBasePresenter<SearchView>()
 
     }
 
-    override fun onTapTryAgain() {
-        loadAllGenereFromApi()
-    }
 
     fun getGenereList(lifecycleOwner: LifecycleOwner){
         mView?.enableSwipeRefresh()

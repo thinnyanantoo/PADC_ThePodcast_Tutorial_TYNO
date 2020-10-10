@@ -15,5 +15,5 @@ interface HomeView : BaseView{
 
     fun selectedDownloadItem(episodePlaylistVO: LatestEpisodeVO)
 
-    fun randomList(randomList : PodCastDetailVO)
+    fun randomList(randomList : LatestEpisodeVO)
 }

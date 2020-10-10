@@ -32,12 +32,12 @@ class EmptyViewPod @JvmOverloads constructor(
 
     private fun setUpListener() {
         btnTryAgain.setOnClickListener {
-            mDelegate?.onTapTryAgain()
+           // mDelegate?.onTapTryAgain()
         }
 
     }
 
     interface Delegate {
-        fun onTapTryAgain()
+      //  fun onTapTryAgain()
     }
 }

@@ -251,7 +251,7 @@ class HomeFragment : Fragment(), HomeView {
                 or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION)
     }
 
-    override fun randomList(randomList: PodCastDetailVO) {
+    override fun randomList(randomList: LatestEpisodeVO) {
         Glide.with(this.requireContext())
             .load(randomList.image)
             .into(ivrandomImage)
@@ -260,7 +260,7 @@ class HomeFragment : Fragment(), HomeView {
         tvDetailInRandom.text = Html.fromHtml(randomList.description)
 
         playerControlView.player = mPresenter.getPlayer().getPlayerImpl(this.requireContext())
-        mPresenter.play(randomList.listennotes_url.toString())
+        mPresenter.play(randomList.audio)
     }
 
 

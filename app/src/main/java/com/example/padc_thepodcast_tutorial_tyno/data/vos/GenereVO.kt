@@ -16,3 +16,11 @@ data class GenereVO (
     @SerializedName("name")var name : String = ""
 
 )
+
+fun MutableMap<String,Any>?.convertToGenerVO() : GenereVO{
+    val genereVO = GenereVO()
+    genereVO.id = this?.get("id") as String
+    genereVO.name = this["name"] as String
+
+    return genereVO
+}

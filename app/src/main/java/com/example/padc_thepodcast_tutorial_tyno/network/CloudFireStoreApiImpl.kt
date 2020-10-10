@@ -1,8 +1,6 @@
 package com.example.padc_thepodcast_tutorial_tyno.network
 
-import com.example.padc_thepodcast_tutorial_tyno.data.vos.GenereVO
-import com.example.padc_thepodcast_tutorial_tyno.data.vos.LatestEpisodeVO
-import com.example.padc_thepodcast_tutorial_tyno.data.vos.PodCastDetailVO
+import com.example.padc_thepodcast_tutorial_tyno.data.vos.*
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -50,15 +48,8 @@ object CloudFireStoreApiImpl : FireBaseApi {
                 val result = value?.documents ?: arrayListOf()
 
                 for(document in result){
-                    val data = document.data
-                    val episode = LatestEpisodeVO()
-                    episode.id = data?.get("id") as String
-                    episode.image = data?.get("image")as String
-                    episode.title = data?.get("title")as String
-                    episode.description = data?.get("description") as String
-                    episode.audioLengthSec = (data?.get("audio_length_sec") as Long).toInt()
-                    episode.audio = data?.get("audio")as String
-                    episodeList.add(episode)
+                    val data = document.data.convertToLatestEpisodeVO()
+                    episodeList.add(data)
                 }
                 onSuccess(episodeList)
             }
@@ -77,14 +68,10 @@ object CloudFireStoreApiImpl : FireBaseApi {
                 val result = value?.documents ?: arrayListOf()
 
                 for (document in result) {
-                    val data = document.data
-                    val genres = GenereVO()
-                    genres.id = data?.get("id") as String
-                    genres.name = data?.get("name") as String
-                    genreList.add(genres)
+                    val data = document.data.convertToGenerVO()
+                    genreList.add(data)
                 }
                 onSuccess(genreList)
-
             }
         }
             }

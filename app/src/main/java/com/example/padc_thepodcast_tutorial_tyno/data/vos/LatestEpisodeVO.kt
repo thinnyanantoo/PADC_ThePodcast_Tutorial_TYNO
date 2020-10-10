@@ -30,5 +30,19 @@ data class LatestEpisodeVO(
     @SerializedName("thumbnail") var thumbNail: String = "",
     @SerializedName("title") var title: String  = "")
 
+fun MutableMap<String,Any>?.convertToLatestEpisodeVO() : LatestEpisodeVO{
+    val latestEpisodeVO = LatestEpisodeVO()
+    latestEpisodeVO.id = this?.get("id")as String
+    latestEpisodeVO.image = this["image"]as String
+    latestEpisodeVO.title = this["title"]as String
+    latestEpisodeVO.description = this["description"]as String
+    latestEpisodeVO.audio = this["audio"]as String
+    latestEpisodeVO.audioLengthSec= (this["audio_length_sec"]as Long).toInt()
+
+
+    return latestEpisodeVO
+
+}
+
 
 

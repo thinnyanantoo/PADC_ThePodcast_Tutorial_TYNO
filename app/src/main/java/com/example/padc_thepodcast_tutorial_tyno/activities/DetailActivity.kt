@@ -24,7 +24,7 @@ class DetailActivity : BaseActivity(), DetailView {
 
     private lateinit var mPresenter: DetailPresenter
     private var mPodCastModel: PodCastModel = PodCastModelImpl
-    val EpisodePlaylistVO : EpisodePlaylistVO ? = null
+    val EpisodePlaylistVO: EpisodePlaylistVO? = null
 
     companion object {
         val PODCAST_KEY = "PODCAST_KEY"
@@ -34,6 +34,7 @@ class DetailActivity : BaseActivity(), DetailView {
             return intent
         }
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
@@ -41,7 +42,7 @@ class DetailActivity : BaseActivity(), DetailView {
         setUpPresenter()
         disableSwipeRefresh()
         val podcastId = intent.getStringExtra(PODCAST_KEY).toString()
-     setData()
+        setData()
 //        setDownloadData()
         mPresenter.onUiReady(podcastId, this)
     }
@@ -64,15 +65,15 @@ class DetailActivity : BaseActivity(), DetailView {
 //        mPresenter.play(episodeDetailVO.audio)
     }
 
-    private fun setData(){
+    private fun setData() {
         val id = intent.getStringExtra(PODCAST_KEY).toString()
-            mPodCastModel.getUpNextById(id)
-                .observe(this, Observer {
-                    it?.let { data->
-                        bindData(data)
-                    }
-                })
-        }
+        mPodCastModel.getUpNextById(id)
+            .observe(this, Observer {
+                it?.let { data ->
+                    bindData(data)
+                }
+            })
+    }
 
 //    private fun setDownloadData(){
 //        val id = intent.getStringExtra(PODCAST_KEY).toString()
@@ -85,24 +86,24 @@ class DetailActivity : BaseActivity(), DetailView {
 //    }
 
 
-    private fun bindData(episodePlaylistVO: LatestEpisodeVO){
+    private fun bindData(episodePlaylistVO: LatestEpisodeVO) {
         Glide.with(this)
             .load(episodePlaylistVO.image)
             .into(ivDetail)
         tvDetailDescription.text = Html.fromHtml(episodePlaylistVO.description)
-        tvTimeDetail.text = episodePlaylistVO.audioLengthSec.toString()+ "\tm"
+        tvTimeDetail.text = episodePlaylistVO.audioLengthSec.toString() + "\tm"
         tvTitleDetail.text = Html.fromHtml(episodePlaylistVO.title)
         miniPlaybackControlView.player = mPresenter.getPlayer().getPlayerImpl(this)
         episodePlaylistVO.audio.let { mPresenter.play(it) }
     }
 
-    private fun bindDownloadDetailData(downloadVO: DownloadVO){
+    private fun bindDownloadDetailData(downloadVO: DownloadVO) {
         Glide.with(this)
         Glide.with(this)
             .load(downloadVO.image)
             .into(ivDetail)
         tvDetailDescription.text = Html.fromHtml(downloadVO.description)
-       // tvTimeDetail.text = episodePlaylistVO.data.audioLengthSec + "\tm"
+        // tvTimeDetail.text = episodePlaylistVO.data.audioLengthSec + "\tm"
         tvTitleDetail.text = Html.fromHtml(downloadVO.title)
         miniPlaybackControlView.player = mPresenter.getPlayer().getPlayerImpl(this)
         downloadVO.audio?.let { mPresenter.play(it) }
@@ -115,7 +116,7 @@ class DetailActivity : BaseActivity(), DetailView {
 //        }
 //    }
 
-//    override fun onResume() {
+    //    override fun onResume() {
 //        super.onResume()
 //        hideSystemUi()
 //        if(Util.SDK_INT<=23)
@@ -138,10 +139,10 @@ class DetailActivity : BaseActivity(), DetailView {
 //        super.onDestroy()
 //        mPresenter.releasePlayer()
 //    }
-override fun onStart() {
-    super.onStart()
-    mPresenter.getPlayer().getPlayerImpl(this)
-}
+    override fun onStart() {
+        super.onStart()
+        mPresenter.getPlayer().getPlayerImpl(this)
+    }
 
     override fun onResume() {
         super.onResume()
@@ -158,11 +159,11 @@ override fun onStart() {
         super.onPause()
         mPresenter.releasePlayer()
     }
+
     override fun onDestroy() {
         super.onDestroy()
         mPresenter.releasePlayer()
     }
-
 
 
     override fun enableSwipeRefresh() {

@@ -15,29 +15,20 @@ import com.example.padc_thepodcast_tutorial_tyno.network.RealtimeDatabaseFirebae
 
 object PodCastModelImpl : PodCastModel, BaseModel() {
     //override var mFireBaseApi: FireBaseApi = RealtimeDatabaseFirebaeApiImpl
+
     override var mFireBaseApi: FireBaseApi = CloudFireStoreApiImpl
-    @SuppressLint("CheckResult")
-    override fun getAllRandomPodCastFromFireBaseAndSaveToDatabase(
-        onSuccess: (PodCastDetailVO) -> Unit,
-        onError: (String) -> Unit
-    ) {
-        mFireBaseApi.getRandomPodCast(onSuccess = {
-            mTheDB.RandomPodCastDao().insertAllRandomPodCasts(it)
-        }, onFailure = {
-            onError
-        })
-    }
-    override fun getAllRandom(onError: (String) -> Unit): LiveData<PodCastDetailVO> {
-        return mTheDB.RandomPodCastDao().getAllRandomPodCast()
+    override fun getRandomPodCast(onError: (String) -> Unit): LiveData<LatestEpisodeVO> {
+        return mTheDB.EpisodeDetailDao().getRandomEpisode()
     }
 
     override fun getUpNextListfromFirebaseToDatabase(
         onSuccess: (List<LatestEpisodeVO>) -> Unit,
         onError: (String) -> Unit
     ) {
-        mFireBaseApi.getUpNext(onSuccess ={
+        mFireBaseApi.getUpNext(onSuccess = {
+            mTheDB.EpisodeDetailDao().deleteAll()
             mTheDB.EpisodeDetailDao().insertAllDetail(it)
-        },onFailure =  {
+        }, onFailure = {
             onError
         })
     }
@@ -52,7 +43,7 @@ object PodCastModelImpl : PodCastModel, BaseModel() {
 
 
     override fun getEpisodeDetailByIdFromApiAndSaveToDatabase(
-        id : String,onSuccess: (PodCastDetailVO) -> Unit,
+        id: String, onSuccess: (PodCastDetailVO) -> Unit,
         onError: (String) -> Unit
     ) {
 //        mFireBaseApi.getEpisodeDetail(onSuccess={
@@ -60,7 +51,7 @@ object PodCastModelImpl : PodCastModel, BaseModel() {
 ////        }, onFailure = {
 ////            onError
 ////        })
-        mFireBaseApi.getEpisodeDetail(id,onSuccess,onError)
+        mFireBaseApi.getEpisodeDetail(id, onSuccess, onError)
     }
 
 //    override fun getDownloadById(id: String): LiveData<DownloadVO> {
@@ -76,19 +67,21 @@ object PodCastModelImpl : PodCastModel, BaseModel() {
         onSuccess: (List<GenereVO>) -> Unit,
         onError: (String) -> Unit
     ) {
-        mFireBaseApi.getGenreList(onSuccess={
-            mTheDB.GenereDao().insertAllGenere(it)
-        },onFailure = {
-            onError
-        })
+        mFireBaseApi.getGenreList(
+            onSuccess = {
+                mTheDB.GenereDao().deleteAll()
+                mTheDB.GenereDao().insertAllGenere(it)
+            }, onFailure = {
+                onError
+            })
     }
 
     override fun startdownladPlaylist(context: Context, episodePlaylistVO: LatestEpisodeVO) {
-        DownloadLoading(context,episodePlaylistVO)
+        DownloadLoading(context, episodePlaylistVO)
     }
 
     override fun getAllDownload(onError: (String) -> Unit): LiveData<List<DownloadVO>> {
-          return mTheDB.downloadDao().getAllDownloadedItem()
+        return mTheDB.downloadDao().getAllDownloadedItem()
     }
 
     override fun getDownloadItme(
@@ -96,7 +89,7 @@ object PodCastModelImpl : PodCastModel, BaseModel() {
         onSuccess: () -> Unit,
         onError: (String) -> Unit
     ) {
-              mTheDB.downloadDao().inserttoDownload(downloadVO)
+        mTheDB.downloadDao().inserttoDownload(downloadVO)
     }
 
     override fun getDownloadById(id: String): LiveData<DownloadVO> {
@@ -111,7 +104,6 @@ object PodCastModelImpl : PodCastModel, BaseModel() {
 //    override fun getEpisdeDetail(id: String): LiveData<LatestEpisodeVO> {
 //        return mTheDB.EpisodeDetailDao().getEpisodeById(id)
 //    }
-
 
 
 }

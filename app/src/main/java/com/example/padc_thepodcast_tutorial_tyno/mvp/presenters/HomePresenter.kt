@@ -19,7 +19,6 @@ interface HomePresenter: BasePresenter<HomeView>,ItemDelegate, EmptyViewPod.Dele
     fun onSwipeRefresh(lifecycleOwner: LifecycleOwner)
 
     fun ondownloadItem(context : Context, episodePlaylistVO: LatestEpisodeVO)
-    fun saveDownlaod(upNextPlayListVO: UpNextPlayListVO)
 
     fun getPlayer() : MediaPlayer
     fun play(url : String)
